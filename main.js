@@ -5,7 +5,9 @@ const electron = require('electron'),
     BrowserWindow = electron.BrowserWindow,
     server = require('./server.js'),
     http = require('http'),
-    fs = require('fs');
+    fs = require('fs'),
+    ip = require('ip'),
+    ipc = require('ipc');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -22,6 +24,11 @@ function createWindow () {
 
 //start the server
 server.startServer(http, fs);
+
+ipc.on('getIp', function(event, data) {
+    event.sender.send('local-ip', ip.address());         
+});
+
 
 app.on('ready', createWindow);
 app.on('window-all-closed', function () {
