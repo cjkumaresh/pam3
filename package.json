@@ -1,7 +1,7 @@
 {
   "name": "pam3",
   "version": "1.0.0",
-  "description": "Control your PC from your smart phone within same network",
+  "description": "Access / Control your PC from your smart phone within same network",
   "main": "main.js",
   "scripts": {
     "start": "electron main.js"
@@ -11,7 +11,7 @@
     "url": "https://github.com/cjkumaresh/pam3.git"
   },
   "keywords": [
-    "Electron",
+    "electron",
     "remote PC",
     "mobile"
   ],
@@ -23,7 +23,8 @@
   "homepage": "https://github.com/cjkumaresh/pam3",
   "devDependencies": {
     "electron-prebuilt": "^0.36.0",
-    "ip":"1.1.0",
-    "node-ipc":"6.0.0"
+    "ip": "1.1.0",
+    "node-ipc": "6.0.0",
+    "node-simple-router": "0.10.0"
   }
 }
