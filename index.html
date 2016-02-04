@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PAM3!</title>
+  </head>
+  <body>
+    <h1>PAM3</h1>
+    <div>
+        <h2>Use this to access / control your PC through your smart phone.</h2>
+        <h3>Open the url, <label id="ip-label"> </label>:8881 in your mobile and enjoy PAM3</h3>
+    </div>
+  </body>
+  <script>
+    'use strict';
+    var ipc = require('ipc');
+    var ipLabel = document.getElementById('ip-label');
+    
+    ipc.send('getIp', 'someData');
+    ipc.on('local-ip', function(response) {
+        ipLabel.innerHTML = response;
+    });
+  </script>
+</html>
