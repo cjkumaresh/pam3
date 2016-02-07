@@ -1,29 +1,34 @@
-exports.startServer = function (http, fs) {
-    var config = require('./config.json'),
-        Router = require('node-simple-router'),
-        router = new Router(),
-        fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+'use strict';
+const config = require('./config.json'),
+    Router = require('node-simple-router'),
+    router = new Router(),
+    fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'],
+    finalHandler = require('finalhandler'),
+    http = require('http'),
+    serveStatic = require('serve-static'),
+    serve = serveStatic('public', {'index': false});
     
-    
+let server;
+
+exports.startServer = function (http, fs) {    
     //initialize router 
-    router.get("/remote", function (request, response) {
-        response.end("remote");
+    router.get("/remote", function (req, res) {
+        res.end("remote");
     });
     
-    router.get("/", function (request, response) {
+    router.get("/getFiles", function (req, res) {
         fs.readdir(fsPath,function (err, files) {
-            response.write(fsPath);
-            for (var key in files) {
-                response.write('\n');
-                response.write(files[key]);
+            res.write(fsPath);
+            for (let key in files) {
+                res.write('\n');
+                res.write(files[key]);
             }
-            response.end();
+            res.end();
         });
-
     });
     
     //initialize server
-    var server = http.createServer(router);
+    server = http.createServer(router);
     server.listen(config.port,function () {
        console.log('server is listening'); 
     });
