@@ -21,12 +21,14 @@
     "url": "https://github.com/cjkumaresh/pam3/issues"
   },
   "homepage": "https://github.com/cjkumaresh/pam3",
-  "devDependencies": {
-    "electron-prebuilt": "^0.36.0",
+  "dependencies": {
     "ip": "1.1.0",
     "node-ipc": "6.0.0",
     "node-simple-router": "0.10.0",
     "serve-static": "1.10.2",
     "finalhandler": "0.4.1"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.0"
   }
 }

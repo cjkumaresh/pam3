@@ -5,7 +5,8 @@ const config = require('./config.json'),
     fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'],
     http = require('http'),
     serveStatic = require('serve-static'),
-    serve = serveStatic('public', {'index': 'index.html'});
+    //serve = serveStatic('public', {'index': 'index.html'}),
+    serve2 = serveStatic('node_modules', {});
     
 let server;
 
