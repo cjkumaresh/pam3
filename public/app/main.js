@@ -3,9 +3,13 @@ define([
     'jquery',
     'underscore',
     'backbone',
-], function ($, _, Backbone) {
+    'app/models/FilesModel.js'
+], function ($, _, Backbone, FilesModel) {
+    let filesModel = new FilesModel();
+    filesModel.fetch();
     let AppView = Backbone.View.extend({
         initialize: function() {
+            filesModel.fetch();
             this.render();
         },
         render: function() {
@@ -15,5 +19,8 @@ define([
         }
     });
 
-    let app_view = new AppView({ el: $("body") });
+    let app_view = new AppView({ 
+        el: $("body"),
+        model: filesModel 
+    });
 });
