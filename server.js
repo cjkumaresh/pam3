@@ -1,26 +1,27 @@
-exports.startServer = function (http, fs) {
-    var Router = require('node-simple-router');
-    var router = new Router();
+'use strict';
+const config = require('./config.json'),
+    Router = require('node-simple-router'),
+    router = new Router(),
+    fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'],
+    http = require('http'),
+    serveStatic = require('serve-static'),
+    //serve = serveStatic('public', {'index': 'index.html'}),
+    serve2 = serveStatic('node_modules', {});
     
-    router.get("/remote", function (request, response) {
-        response.end("remote");
-    });
-    
-    router.get("/", function (request, response) {
-        var fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
-        fs.readdir(fsPath,function (err, files) {
-            response.write(fsPath);
-            for (var key in files) {
-                response.write('\n');
-                response.write(files[key]);
-            }
-            response.end();
-        });
+let server;
 
+exports.startServer = function (http, fs) {    
+    //initialize server
+    
+    router.get("/getFiles", function (req, res) {
+        fs.readdir(fsPath,function (err, files) {
+            res.setHeader('Content-Type', 'application/json');
+            res.end( JSON.stringify(files) );
+        });
     });
     
-    var server = http.createServer(router);
-    server.listen(8881,function () {
+    server = http.createServer(router);
+    server.listen(config.port,function () {
        console.log('server is listening'); 
     });
 };
