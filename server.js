@@ -3,10 +3,9 @@ const config = require('./config.json'),
     Router = require('node-simple-router'),
     router = new Router(),
     fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'],
-    http = require('http'),
-    serveStatic = require('serve-static'),
-    //serve = serveStatic('public', {'index': 'index.html'}),
-    serve2 = serveStatic('node_modules', {});
+    http = require('http');
+    //serveStatic = require('serve-static')
+    
     
 let server;
 
