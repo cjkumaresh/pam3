@@ -3,7 +3,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'app/models/FilesModel.js'
+    'models/FilesModel'
 ], function ($, _, Backbone, FilesModel) {
     let filesModel = new FilesModel(),
         AppView = Backbone.View.extend({
