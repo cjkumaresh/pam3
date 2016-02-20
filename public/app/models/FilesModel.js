@@ -9,7 +9,9 @@ define([
        url: 'getFiles',
        parse: function(data) {
            //return data;
-           new FileSystemView(data);
+           new FileSystemView({
+               model: data
+           });
        }
     });
 });

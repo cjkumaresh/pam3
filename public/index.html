@@ -4,6 +4,19 @@
         <title>PAM3</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="app/css/font-awesome.min.css">
+        <style>
+            body {
+                font-family: monospace;
+                font-size: larger;
+            }
+            li {
+                list-style: none;
+                padding: 8px;
+            }
+            label {
+                margin-left: 7px;
+            }
+        </style>    
         <script data-main="app/app" src="app/lib/require.js"></script>    
         <script type="text/template" id="title_template">        
              <h1>Welcome to <%=app_name %></h1>
@@ -12,7 +25,7 @@
             <h3>Location <%=path %></h3>
             <ul>
                 <% _.each(files, function(file) { %>
-                    <li><%= file %></li>
+                    <li><i class="fa fa-folder"></i><label><%= file %></label></li>
                 <% }); %>
             </ul>
         </script>

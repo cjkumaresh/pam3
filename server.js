@@ -21,6 +21,15 @@ exports.startServer = function (http, fs) {
         });
     });
     
+     router.get("/navigate", function (req, res) {
+        fsPath = fsPath +'/' + url.parse(req.url,true).query;
+        fs.readdir(fsPath, function (err, files) {
+            res.setHeader('Content-Type', 'application/json');
+            files = files.filter(filter.getProperFiles);
+            res.end(JSON.stringify({'path':fsPath,'files':files}));
+        });
+    });
+    
     server = http.createServer(router);
     server.listen(config.port, function () {
        console.log('server is listening'); 
