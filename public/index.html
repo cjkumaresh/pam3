@@ -6,10 +6,10 @@
         <link rel="stylesheet" href="app/css/font-awesome.min.css">
         <script data-main="app/app" src="app/lib/require.js"></script>    
         <script type="text/template" id="title_template">        
-            <!--<i class="fa fa-folder"></i>-->
-           <h1>Welcome to <%=app_name %></h1>
+             <h1>Welcome to <%=app_name %></h1>
         </script>
         <script type="text/template" id="file-system-view-template">
+            <h3>Location <%=path %></h3>
             <ul>
                 <% _.each(files, function(file) { %>
                     <li><%= file %></li>

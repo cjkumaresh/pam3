@@ -14,15 +14,15 @@ exports.startServer = function (http, fs) {
     //initialize server
     
     router.get("/getFiles", function (req, res) {
-        fs.readdir(fsPath,function (err, files) {
+        fs.readdir(fsPath, function (err, files) {
             res.setHeader('Content-Type', 'application/json');
             files = files.filter(filter.getProperFiles);
-            res.end( JSON.stringify(files) );
+            res.end(JSON.stringify({'path':fsPath,'files':files}));
         });
     });
     
     server = http.createServer(router);
-    server.listen(config.port,function () {
+    server.listen(config.port, function () {
        console.log('server is listening'); 
     });
 };
