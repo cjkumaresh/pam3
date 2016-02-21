@@ -11,8 +11,7 @@ let server;
 const fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 
 exports.startServer = function (http, fs) {    
-    //initialize server
-    
+    //initialize server    
     router.get('/getFiles', function (req, res) {
         try {
             fs.accessSync(fsPath, fs.F_OK);
@@ -33,7 +32,6 @@ exports.startServer = function (http, fs) {
         for (var k in accessPath) {
             path = path + '\\' + accessPath[k];
         }
-        //path = fsPath +'\\' + decodeURIComponent(req.params.path);
         try {
             fs.accessSync(path, fs.F_OK);
             fs.readdir(path, function (err, files) {
@@ -49,7 +47,6 @@ exports.startServer = function (http, fs) {
     router.post('/openFile', function (req, res) {
         var path = fsPath +'\\' + decodeURIComponent(req.post.fileName);
         var readableStream = fs.createReadStream(path);
-        //var writableStream = fs.createWriteStream('file2.txt');
         readableStream.setEncoding('utf8');
         readableStream.pipe(res);
     });
