@@ -7,11 +7,17 @@ define([
 ], function ($, _, Backbone, FileSystemView) {
     return Backbone.Model.extend({
        url: 'getFiles',
+       defaults: {
+           path: '',
+           data: '',
+           caller: ''
+       },
        parse: function(data) {
-           //return data;
-           new FileSystemView({
-               model: data
+           this.set(data);
+           this.set({
+               caller: this
            });
+           new FileSystemView(this);
        }
     });
 });

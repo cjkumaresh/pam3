@@ -16,17 +16,17 @@ exports.startServer = function (http, fs) {
     router.get("/getFiles", function (req, res) {
         fs.readdir(fsPath, function (err, files) {
             res.setHeader('Content-Type', 'application/json');
-            files = files.filter(filter.getProperFiles);
+            //files = files.filter(filter.getProperFiles);
             res.end(JSON.stringify({'path':fsPath,'files':files}));
         });
     });
     
-     router.get("/navigate", function (req, res) {
-        fsPath = fsPath +'/' + url.parse(req.url,true).query;
+     router.get("/navigate/:path", function (req, res) { 
+        fsPath = fsPath +'\\' + req.params.path;
         fs.readdir(fsPath, function (err, files) {
             res.setHeader('Content-Type', 'application/json');
-            files = files.filter(filter.getProperFiles);
-            res.end(JSON.stringify({'path':fsPath,'files':files}));
+            //files = files.filter(filter.getProperFiles);
+            res.end(JSON.stringify({'path':fsPath,'files':files, 'params':req.params.path}));
         });
     });
     

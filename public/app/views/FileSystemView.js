@@ -9,30 +9,37 @@ define([
     return  Backbone.View.extend({
         el: '#file-system-view',
         
+        caller: '',
+        
         events: {
             'click ul': 'handleSelect'
         },
         
         data: {
           path: '',
-          files: ['Mo files']  
+          files: ['No files']  
         },
         
-        initialize: function () {
-            if (this.model) {
-                this.data = this.model;
+        initialize: function (options) {
+            if (options) {
+                this.data['path'] = options.get('path');
+                this.data['files'] = options.get('files');
+                this.caller = options.get('caller');
             } 
             
             this.render();
         },
         
         render: function () {
+            this.unbind();
             let fileSystemTemplate = _.template($("#file-system-view-template").html());
-            this.$el.append(fileSystemTemplate(this.data));
+            this.$el.html(fileSystemTemplate(this.data));
         },
         
         handleSelect: function (e) {
-           console.log(e.target.textContent);
+            this.caller.fetch({
+                url: 'navigate/' + e.target.textContent
+            });
         }
     });    
 });
