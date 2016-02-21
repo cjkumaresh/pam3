@@ -11,12 +11,12 @@ define([
         
         caller: '',
         
-        events: {
-            'click ul': 'handleSelect'
-        },
+        // events: {
+        //     'click ul': 'handleSelect'
+        // },
         
         initialize: function () {
-            //this.model = filesModel.fetch();    
+            this.model.location = location.href.split('#')[1] + "/";    
             this.render();
             //this.model.bind('change', this.render);
         },
@@ -28,17 +28,10 @@ define([
         },
         
         handleSelect: function (e) {
-            var view = this;
             var accessPath = e.target.textContent;
             var keys = ['txt', 'xls', 'xlsx', 'mp3', 'mp4', 'jpg', 'png' ];
             if (keys.indexOf(accessPath.split('.')[1]) !== -1) {
-                //  filesModel.save({
-                //     url: 'openFile',
-                //     data: {'fileName': accessPath}
-                //  }).done(function(data) {
-                //     view.model = data;
-                //     view.render();
-                // });
+                location.href = location.href + '/' + accessPath;
                 $.ajax({
                    url: 'openFile',
                    data: {'fileName': accessPath},
@@ -48,12 +41,7 @@ define([
                    }
                 });
             } else {
-                filesModel.fetch({
-                    url: 'navigate/' + encodeURIComponent(accessPath)
-                }).done(function(data) {
-                    view.model = data;
-                    view.render();
-                });
+                location.href = location.href + '/navigate/' + accessPath;
             }
           
         }

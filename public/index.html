@@ -25,13 +25,14 @@
             <h3>Location <%=path %></h3>
             <ul>
                 <% _.each(files, function(file) { %>
-                    <li><i class="fa fa-folder"></i><label><%= file %></label></li>
+                    <li><i class="fa fa-folder"></i><a href="#<%= location %><%= file %>"><label><%= file %></label></a></li>
                 <% }); %>
             </ul>
         </script>
     </head>
     <body>
         <div id="app-name"></div>
+        <a href="#/home">Browse Files and Folders</a>
         <div id="file-system-view"></div>
     </body>    
 </html>

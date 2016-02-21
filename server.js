@@ -7,8 +7,8 @@ const config = require('./config.json'),
     //serveStatic = require('serve-static')
     
     
-let server,
-    fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+let server;
+const fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 
 exports.startServer = function (http, fs) {    
     //initialize server
@@ -27,14 +27,19 @@ exports.startServer = function (http, fs) {
         
     });
     
-     router.get('/navigate/:path', function (req, res) { 
-        fsPath = fsPath +'\\' + decodeURIComponent(req.params.path);
+     router.get('/navigate/:path', function (req, res) {
+        var path = fsPath;
+        var accessPath = req.params.path.split('#');
+        for (var k in accessPath) {
+            path = path + '\\' + accessPath[k];
+        }
+        var path = fsPath +'\\' + decodeURIComponent(req.params.path);
         try {
-            fs.accessSync(fsPath, fs.F_OK);
-            fs.readdir(fsPath, function (err, files) {
+            fs.accessSync(path, fs.F_OK);
+            fs.readdir(path, function (err, files) {
                 res.setHeader('Content-Type', 'application/json');
                 //files = files.filter(filter.getProperFiles);
-                res.end(JSON.stringify({'path':fsPath,'files':files, 'params':req.params.path}));
+                res.end(JSON.stringify({'path':path,'files':files, 'params':req.params.path}));
             });
          } catch (e) {
             throw e;
@@ -42,8 +47,8 @@ exports.startServer = function (http, fs) {
     });
     
     router.post('/openFile', function (req, res) {
-        fsPath = fsPath +'\\' + decodeURIComponent(req.post.fileName);
-        var readableStream = fs.createReadStream(fsPath);
+        var path = fsPath +'\\' + decodeURIComponent(req.post.fileName);
+        var readableStream = fs.createReadStream(path);
         //var writableStream = fs.createWriteStream('file2.txt');
         readableStream.setEncoding('utf8');
         readableStream.pipe(res);
