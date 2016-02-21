@@ -6,12 +6,13 @@ define([
     'models/FilesModel',
     'views/FileSystemView'
 ], function ($, _, Backbone, FilesModel, FileSystemView) {
+    //var files = new FilesModel().fetch();
     let AppView = Backbone.View.extend({
-        initialize: function() {
+        initialize: function () {
             this.render();
         },
         
-        render: function() {
+        render: function () {
             let variables = { app_name: "PAM-3" };
             let template = _.template( $("#title_template").html() );
             this.$el.append(template(variables));
@@ -22,5 +23,13 @@ define([
         el: $("#app-name") 
     });
     
-    new FilesModel().fetch();
+    // new FileSystemView({
+    //     model: files
+    // });
+    
+    new FilesModel().fetch().done(function(files) {
+        new FileSystemView({
+            model: files
+        });
+    });
 });

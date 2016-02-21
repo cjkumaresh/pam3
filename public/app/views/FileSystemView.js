@@ -5,8 +5,8 @@ define([
     'backbone',
     'models/FilesModel'
 ],function ($, _, Backbone, FilesModel) {
-    
-    return  Backbone.View.extend({
+    var filesModel = new FilesModel();
+    return Backbone.View.extend({
         el: '#file-system-view',
         
         caller: '',
@@ -15,31 +15,47 @@ define([
             'click ul': 'handleSelect'
         },
         
-        data: {
-          path: '',
-          files: ['No files']  
-        },
-        
-        initialize: function (options) {
-            if (options) {
-                this.data['path'] = options.get('path');
-                this.data['files'] = options.get('files');
-                this.caller = options.get('caller');
-            } 
-            
+        initialize: function () {
+            //this.model = filesModel.fetch();    
             this.render();
+            //this.model.bind('change', this.render);
         },
         
         render: function () {
-            this.unbind();
             let fileSystemTemplate = _.template($("#file-system-view-template").html());
-            this.$el.html(fileSystemTemplate(this.data));
+            this.$el.html(fileSystemTemplate(this.model));
+            return this;
         },
         
         handleSelect: function (e) {
-            this.caller.fetch({
-                url: 'navigate/' + e.target.textContent
-            });
+            var view = this;
+            var accessPath = e.target.textContent;
+            var keys = ['txt', 'xls', 'xlsx', 'mp3', 'mp4', 'jpg', 'png' ];
+            if (keys.indexOf(accessPath.split('.')[1]) !== -1) {
+                //  filesModel.save({
+                //     url: 'openFile',
+                //     data: {'fileName': accessPath}
+                //  }).done(function(data) {
+                //     view.model = data;
+                //     view.render();
+                // });
+                $.ajax({
+                   url: 'openFile',
+                   data: {'fileName': accessPath},
+                   type: 'POST',
+                   success: function (data) {
+                       console.log('data');
+                   }
+                });
+            } else {
+                filesModel.fetch({
+                    url: 'navigate/' + encodeURIComponent(accessPath)
+                }).done(function(data) {
+                    view.model = data;
+                    view.render();
+                });
+            }
+          
         }
     });    
 });
