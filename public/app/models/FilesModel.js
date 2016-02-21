@@ -3,11 +3,16 @@ define([
     'jquery',
     'underscore',
     'backbone'
-], function ($, _, Backbone) {
+], function ($, _, Backbone, FileSystemView) {
     return Backbone.Model.extend({
        url: 'getFiles',
+       defaults: {
+           path: '',
+           data: ''
+       },
        parse: function(data) {
-           return data;
+           this.set(data);
+           return this;
        }
     });
 });
