@@ -29,11 +29,11 @@ exports.startServer = function (http, fs) {
     
      router.get('/navigate/:path', function (req, res) {
         var path = fsPath;
-        var accessPath = req.params.path.split('#');
+        var accessPath = req.params.path.split('-');
         for (var k in accessPath) {
             path = path + '\\' + accessPath[k];
         }
-        var path = fsPath +'\\' + decodeURIComponent(req.params.path);
+        //path = fsPath +'\\' + decodeURIComponent(req.params.path);
         try {
             fs.accessSync(path, fs.F_OK);
             fs.readdir(path, function (err, files) {

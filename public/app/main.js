@@ -39,7 +39,7 @@ define([
             },
             navigateRoute: function (path) {
                 new FilesModel().fetch({
-                    url: 'navigate/' + path.replace('/','#')
+                    url: 'navigate/' + path.replace('/','-')
                 }).done(function(files) {
                     new FileSystemView({
                         model: files
