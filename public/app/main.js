@@ -38,8 +38,10 @@ define([
                 });
             },
             navigateRoute: function (path) {
-                new FilesModel().fetch({
-                    url: 'navigate/' + path.replace('/','-')
+                $.ajax({
+                    url: 'navigate',
+                    type: 'POST',
+                    data:{'path': path}
                 }).done(function(files) {
                     new FileSystemView({
                         model: files

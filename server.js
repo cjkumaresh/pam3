@@ -26,9 +26,9 @@ exports.startServer = function (http, fs) {
         
     });
     
-     router.get('/navigate/:path', function (req, res) {
+     router.post('/navigate', function (req, res) {
         var path = fsPath;
-        var accessPath = req.params.path.split('-');
+        var accessPath = req.post.path.split('/');
         for (var k in accessPath) {
             path = path + '\\' + accessPath[k];
         }
@@ -37,7 +37,7 @@ exports.startServer = function (http, fs) {
             fs.readdir(path, function (err, files) {
                 res.setHeader('Content-Type', 'application/json');
                 //files = files.filter(filter.getProperFiles);
-                res.end(JSON.stringify({'path':path,'files':files, 'params':req.params.path}));
+                res.end(JSON.stringify({'path':path,'files':files, 'params':req.post.path}));
             });
          } catch (e) {
             throw e;
