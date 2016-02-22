@@ -33,12 +33,19 @@ exports.startServer = function (http, fs) {
             path = path + '\\' + accessPath[k];
         }
         try {
-            fs.accessSync(path, fs.F_OK);
-            fs.readdir(path, function (err, files) {
-                res.setHeader('Content-Type', 'application/json');
-                //files = files.filter(filter.getProperFiles);
-                res.end(JSON.stringify({'path':path,'files':files, 'params':req.post.path}));
-            });
+            var type = fs.lstatSync(path);
+            if (type.isDirectory()) {
+                fs.readdir(path, function (err, files) {
+                    res.setHeader('Content-Type', 'application/json');
+                    //files = files.filter(filter.getProperFiles);
+                    res.end(JSON.stringify({'path':path,'files':files, 'params':req.post.path}));
+                });    
+            } else {
+                var readableStream = fs.createReadStream(path);
+                readableStream.setEncoding('utf8');
+                readableStream.pipe(res);
+            }
+            
          } catch (e) {
             throw e;
         }

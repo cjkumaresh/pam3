@@ -29,6 +29,20 @@
                 <% }); %>
             </ul>
         </script>
+        <script type="text/template" id="media-file-view-template">
+                <% if(type == 'audio') { %>
+                    <audio src="<%= src %>"/> 
+                <% } else if (type == 'picture') { %>
+                    <img src='<%= src %>'/>
+                <% } else if (type == 'video') { %>
+                    <video src="<%= src %>"/>
+                <% } else if (type == 'text') { %>
+                    <div><%= src %></div>                        
+                <% } else { %>
+                    <div>File Format doesn't supported</div>
+                <% } %>    
+                        
+        </script>
     </head>
     <body>
         <div id="app-name"></div>

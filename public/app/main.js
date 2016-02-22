@@ -4,8 +4,9 @@ define([
     'underscore',
     'backbone',
     'models/FilesModel',
-    'views/FileSystemView'
-], function ($, _, Backbone, FilesModel, FileSystemView) {
+    'views/FileSystemView',
+    'views/MediaView'
+], function ($, _, Backbone, FilesModel, FileSystemView, MediaView) {
     
       var AppView = Backbone.View.extend({
             initialize: function () {
@@ -42,10 +43,16 @@ define([
                     url: 'navigate',
                     type: 'POST',
                     data:{'path': path}
-                }).done(function(files) {
-                    new FileSystemView({
-                        model: files
-                    });
+                }).done(function(data) {
+                    if (data.files) {
+                        new FileSystemView({
+                            model: data
+                        });    
+                    } else {
+                        new MediaView({
+                            model: {'src': data}
+                        })
+                    }
                 });
             }
       });
