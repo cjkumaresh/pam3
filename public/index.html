@@ -20,6 +20,7 @@
         <script data-main="app/app" src="app/lib/require.js"></script>    
         <script type="text/template" id="title_template">        
              <h1>Welcome to <%=app_name %></h1>
+             <img id="image"></img>
         </script>
         <script type="text/template" id="file-system-view-template">
             <h3>Location <%=path %></h3>
@@ -33,7 +34,7 @@
                 <% if(type == 'audio') { %>
                     <audio src="<%= src %>"/> 
                 <% } else if (type == 'picture') { %>
-                    <img src='<%= src %>'/>
+                    <img/>
                 <% } else if (type == 'video') { %>
                     <video src="<%= src %>"/>
                 <% } else if (type == 'text') { %>
@@ -48,6 +49,7 @@
         <div id="app-name"></div>
         <a href="#/home">Browse Files and Folders</a>
         <div id="file-system-view"></div>
+        <div id="media-view"></div>
     </body>    
 </html>
     

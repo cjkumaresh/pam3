@@ -55,6 +55,7 @@ exports.startServer = function (http, fs) {
         var path = fsPath +'\\' + decodeURIComponent(req.post.fileName);
         var readableStream = fs.createReadStream(path);
         readableStream.setEncoding('utf8');
+        res.setHeader('content-type', 'text/plain');
         readableStream.pipe(res);
     });
     

@@ -5,18 +5,19 @@ define([
     'backbone'
 ],function($, _, Backbone){
     return Backbone.View.extend({
-        el: 'body',
+        el: '#media-view',
         
         initialize: function () {
             this.model.fileName = this.getFileName(location.href);
-            this.model.type = 'text';  
+            this.model.type = 'picture';  
             this.model.src = this.model.src;    
             this.render();
         },
         
         render: function () {
+            $('#file-system-view').html('');
             let mediaFileViewTemplate = _.template($("#media-file-view-template").html());
-            this.$el.html(mediaFileViewTemplate(this.model));
+            this.$el.append(mediaFileViewTemplate(this.model));
         },
         
         getFileName: function (url) {
