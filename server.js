@@ -1,8 +1,6 @@
 'use strict';
 const config = require('./config.json'),
     express = require('express'),
-    Router = require('node-simple-router'),
-    router = new Router(),    
     http = require('http'),
     filter = require('./lib/utils/filter'),
     bodyParser = require('body-parser'),

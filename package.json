@@ -27,8 +27,7 @@
     "finalhandler": "0.4.1",
     "ip": "1.1.0",
     "multer": "^1.1.0",
-    "node-ipc": "6.0.0",
-    "node-simple-router": "0.10.0"
+    "node-ipc": "6.0.0"    
   },
   "devDependencies": {
     "electron-prebuilt": "^0.36.0"
