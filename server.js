@@ -44,13 +44,10 @@ exports.startServer = function (http, fs) {
                     res.end(JSON.stringify({'path':path,'files':files, 'params':req.body}));
                 });    
             } else {
-                // var readableStream = fs.createReadStream(path);
-                // readableStream.setEncoding('utf8');
-                // readableStream.pipe(res);
-                // var file = fs.readFileSync(path);
+                 var file = fs.readFileSync(path);
                  res.writeHead(200, {'Content-Type': 'image/jpg' });
-                // res.end(bin2string(file));
-                res.sendFile(path);
+                 var base64data = new Buffer(file, 'binary').toString('base64');
+                 res.end(base64data);
             }
             
          } catch (e) {
@@ -68,7 +65,6 @@ function sendFileList(req, res, fs) {
         fs.accessSync(fsPath, fs.F_OK);
         fs.readdir(fsPath, function (err, files) {
             res.setHeader('Content-Type', 'application/json');
-            //files = files.filter(filter.getProperFiles);
             res.end(JSON.stringify({'path':fsPath,'files':files}));
         });
     } catch (e) {
