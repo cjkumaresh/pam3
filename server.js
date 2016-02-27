@@ -19,9 +19,6 @@ exports.startServer = function (http, fs) {
     app.use(express.static('public'));
     app.use(bodyParser.json()); // for parsing application/json
     app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-    // app.get('/', function (req, res) {
-    //     sendFileList(req, res, fs);        
-    // });
         
     app.get('/getFiles', function (req, res) {
         sendFileList(req, res, fs);        
@@ -55,7 +52,7 @@ exports.startServer = function (http, fs) {
         }
     });
 
-    app.listen(3000, function () {
+    app.listen(config.port, function () {
         console.log('Example app listening on port 3000!');
     });    
 };
