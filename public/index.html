@@ -20,19 +20,36 @@
         <script data-main="app/app" src="app/lib/require.js"></script>    
         <script type="text/template" id="title_template">        
              <h1>Welcome to <%=app_name %></h1>
+             <img id="image"></img>
         </script>
         <script type="text/template" id="file-system-view-template">
             <h3>Location <%=path %></h3>
             <ul>
                 <% _.each(files, function(file) { %>
-                    <li><i class="fa fa-folder"></i><label><%= file %></label></li>
+                    <li><i class="fa fa-folder"></i><a href="#<%= location %><%= file %>"><label><%= file %></label></a></li>
                 <% }); %>
             </ul>
+        </script>
+        <script type="text/template" id="media-file-view-template">
+                <% if(type == 'audio') { %>
+                    <audio src="<%= src %>"/> 
+                <% } else if (type == 'picture') { %>
+                    <img src="<%= src %>"/>
+                <% } else if (type == 'video') { %>
+                    <video src="<%= src %>"/>
+                <% } else if (type == 'text') { %>
+                    <div><%= src %></div>                        
+                <% } else { %>
+                    <div>File Format doesn't supported</div>
+                <% } %>    
+                        
         </script>
     </head>
     <body>
         <div id="app-name"></div>
+        <a href="#/home">Browse Files and Folders</a>
         <div id="file-system-view"></div>
+        <div id="media-view"></div>
     </body>    
 </html>
     

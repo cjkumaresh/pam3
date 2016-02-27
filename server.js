@@ -1,56 +1,70 @@
 'use strict';
 const config = require('./config.json'),
-    Router = require('node-simple-router'),
-    router = new Router(),    
+    express = require('express'),
     http = require('http'),
-    filter = require('./lib/utils/filter');
-    //serveStatic = require('serve-static')
+    filter = require('./lib/utils/filter'),
+    bodyParser = require('body-parser'),
+    multer = require('multer');
+    
     
     
 let server,
-    fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+    app = express(),
+    upload = multer();
+    
+const fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 
 exports.startServer = function (http, fs) {    
     //initialize server
-    
-    router.get('/getFiles', function (req, res) {
-        try {
-            fs.accessSync(fsPath, fs.F_OK);
-            fs.readdir(fsPath, function (err, files) {
-                res.setHeader('Content-Type', 'application/json');
-                //files = files.filter(filter.getProperFiles);
-                res.end(JSON.stringify({'path':fsPath,'files':files}));
-            });
-        } catch (e) {
-            throw e;
-        }
+    app.use(express.static('public'));
+    app.use(bodyParser.json()); // for parsing application/json
+    app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
         
+    app.get('/getFiles', function (req, res) {
+        sendFileList(req, res, fs);        
     });
     
-     router.get('/navigate/:path', function (req, res) { 
-        fsPath = fsPath +'\\' + decodeURIComponent(req.params.path);
+     app.post('/navigate', function (req, res) {
+        if (!req.body) 
+            return res.sendStatus(400);
+        var path = fsPath;
+        var accessPath = req.body.path.split('/');
+        for (var k in accessPath) {
+            path = path + '\\' + accessPath[k];
+        }
         try {
-            fs.accessSync(fsPath, fs.F_OK);
-            fs.readdir(fsPath, function (err, files) {
-                res.setHeader('Content-Type', 'application/json');
-                //files = files.filter(filter.getProperFiles);
-                res.end(JSON.stringify({'path':fsPath,'files':files, 'params':req.params.path}));
-            });
+            var type = fs.lstatSync(path);
+            if (type.isDirectory()) {
+                fs.readdir(path, function (err, files) {
+                    res.setHeader('Content-Type', 'application/json');
+                    //files = files.filter(filter.getProperFiles);
+                    res.end(JSON.stringify({'path':path,'files':files, 'params':req.body}));
+                });    
+            } else {
+                 var file = fs.readFileSync(path);
+                 res.writeHead(200, {'Content-Type': 'image/jpg' });
+                 var base64data = new Buffer(file, 'binary').toString('base64');
+                 res.end(base64data);
+            }
+            
          } catch (e) {
             throw e;
         }
     });
-    
-    router.post('/openFile', function (req, res) {
-        fsPath = fsPath +'\\' + decodeURIComponent(req.post.fileName);
-        var readableStream = fs.createReadStream(fsPath);
-        //var writableStream = fs.createWriteStream('file2.txt');
-        readableStream.setEncoding('utf8');
-        readableStream.pipe(res);
-    });
-    
-    server = http.createServer(router);
-    server.listen(config.port, function () {
-       console.log('server is listening'); 
-    });
+
+    app.listen(config.port, function () {
+        console.log('Example app listening on port 3000!');
+    });    
 };
+
+function sendFileList(req, res, fs) {
+    try {
+        fs.accessSync(fsPath, fs.F_OK);
+        fs.readdir(fsPath, function (err, files) {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({'path':fsPath,'files':files}));
+        });
+    } catch (e) {
+            throw e;
+    }
+}
