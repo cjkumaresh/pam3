@@ -5,7 +5,9 @@ const config = require('./config.json'),
     filter = require('./lib/utils/filter'),
     bodyParser = require('body-parser'),
     multer = require('multer'),
-    fs = require('fs');
+    fs = require('fs'),
+    mime = require('mime-types'),
+    pathUtil = require('path');
     
     
     
@@ -25,7 +27,13 @@ exports.startServer = function (http, fs) {
         sendFileList(req, res, fsPath);        
     });
     
-     app.post('/navigate', function (req, res) {
+    app.get('/music', function (req, res) {
+        res.set({'Content-Type': 'audio/mpeg'});
+        let readStream = fs.createReadStream('c:/users/intex/Downloads/Music/biriyani/07. Nahnh Na Nah (Jack Swing Mix) - www.TamilRockers.Net.mp3');
+        readStream.pipe(res);     
+    });
+    
+    app.post('/navigate', function (req, res) {
         if (!req.body) 
             return res.sendStatus(400);
         let path = getPath(req),
@@ -52,9 +60,31 @@ function sendFileList(req, res, path) {
 
 function streamFile(req, res, path) {
     let file = fs.readFileSync(path);
-    res.writeHead(200, {'Content-Type': 'image/jpg' });
-    let base64data = new Buffer(file, 'binary').toString('base64');
-    res.end(base64data);
+    let fileExtn = pathUtil.extname(path);
+    
+    switch (fileExtn) {
+        case '.jpg':
+            let base64data = new Buffer(file, 'binary').toString('base64');
+            res.writeHead(200, mime.contentType(path));
+            res.end(JSON.stringify({'status': 'success','src': base64data,'extn': fileExtn}));            
+            break;
+        case '.txt':
+            res.setHeader('Content-Type', mime.contentType(path));
+            res.end(JSON.stringify({'src': 'text file','extn': fileExtn}));
+            break;
+        case '.mp3':
+            res.setHeader('Content-Type', mime.contentType(path));
+            res.end(JSON.stringify({'src': 'audio file','extn': fileExtn}));
+            break;
+        case '.mp4':
+            res.setHeader('Content-Type', mime.contentType(path));
+            res.end(JSON.stringify({'src': 'implementation in progress','extn': fileExtn}));
+            break;     
+        default:
+            res.setHeader('Content-Type', mime.contentType(path));
+            res.end(JSON.stringify({'src': 'file format not supported yet','extn': fileExtn}));
+            break; 
+    }
 }
 
 function getPath(req) {

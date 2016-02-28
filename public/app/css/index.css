@@ -1,0 +1,21 @@
+
+html, body {
+    height: 100%;
+}
+body {
+    font-family: monospace;
+    font-size: larger;
+}
+#app-name {
+    height: 10%;
+}
+#media-view img {
+    height: 100%;
+}
+li {
+    list-style: none;
+    padding: 8px;
+}
+label {
+    margin-left: 7px;
+}

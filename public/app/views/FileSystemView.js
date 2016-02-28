@@ -15,7 +15,7 @@ define([
         
         render: function () {
             $('#media-view').html('');
-            let fileSystemTemplate = _.template($("#file-system-view-template").html());
+            var fileSystemTemplate = _.template($("#file-system-view-template").html());
             this.$el.html(fileSystemTemplate(this.model));
             return this;
         }

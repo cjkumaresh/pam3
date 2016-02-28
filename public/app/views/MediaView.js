@@ -7,8 +7,7 @@ define([
     return Backbone.View.extend({
         el: '#media-view',
         
-        initialize: function () {
-            this.model.type = 'picture';    
+        initialize: function () {  
             this.render();
         },
         

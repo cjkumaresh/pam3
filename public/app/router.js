@@ -36,10 +36,14 @@ define([
                     new FileSystemView({
                         model: data
                     });    
+                } else if (data.src) {
+                    new MediaView({
+                        model: JSON.parse(data)
+                    });
                 } else {
                     new MediaView({
-                        model: {'src': "data:image/jpg;base64," + data}
-                    })
+                        model: {'src': data, 'extn':'.mp3'}
+                    });
                 }
             });
         }
