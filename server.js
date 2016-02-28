@@ -29,7 +29,7 @@ exports.startServer = function (http, fs) {
     
     app.get('/music', function (req, res) {
         res.set({'Content-Type': 'audio/mpeg'});
-        let readStream = fs.createReadStream('c:/users/intex/Downloads/Music/biriyani/07. Nahnh Na Nah (Jack Swing Mix) - www.TamilRockers.Net.mp3');
+        let readStream = fs.createReadStream('mp3 file name');
         readStream.pipe(res);     
     });
     
