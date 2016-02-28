@@ -4,7 +4,8 @@ const config = require('./config.json'),
     http = require('http'),
     filter = require('./lib/utils/filter'),
     bodyParser = require('body-parser'),
-    multer = require('multer');
+    multer = require('multer'),
+    fs = require('fs');
     
     
     
@@ -21,35 +22,15 @@ exports.startServer = function (http, fs) {
     app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
         
     app.get('/getFiles', function (req, res) {
-        sendFileList(req, res, fs);        
+        sendFileList(req, res, fsPath);        
     });
     
      app.post('/navigate', function (req, res) {
         if (!req.body) 
             return res.sendStatus(400);
-        var path = fsPath;
-        var accessPath = req.body.path.split('/');
-        for (var k in accessPath) {
-            path = path + '\\' + accessPath[k];
-        }
-        try {
-            var type = fs.lstatSync(path);
-            if (type.isDirectory()) {
-                fs.readdir(path, function (err, files) {
-                    res.setHeader('Content-Type', 'application/json');
-                    //files = files.filter(filter.getProperFiles);
-                    res.end(JSON.stringify({'path':path,'files':files, 'params':req.body}));
-                });    
-            } else {
-                 var file = fs.readFileSync(path);
-                 res.writeHead(200, {'Content-Type': 'image/jpg' });
-                 var base64data = new Buffer(file, 'binary').toString('base64');
-                 res.end(base64data);
-            }
-            
-         } catch (e) {
-            throw e;
-        }
+        let path = getPath(req),
+            type = fs.lstatSync(path);
+        (type.isDirectory()) ? sendFileList(req, res, path) : streamFile(req, res, path);   
     });
 
     app.listen(config.port, function () {
@@ -57,14 +38,30 @@ exports.startServer = function (http, fs) {
     });    
 };
 
-function sendFileList(req, res, fs) {
+function sendFileList(req, res, path) {
     try {
-        fs.accessSync(fsPath, fs.F_OK);
-        fs.readdir(fsPath, function (err, files) {
+        fs.accessSync(path, fs.F_OK);
+        fs.readdir(path, function (err, files) {
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify({'path':fsPath,'files':files}));
         });
     } catch (e) {
-            throw e;
+        throw e;
     }
+}
+
+function streamFile(req, res, path) {
+    let file = fs.readFileSync(path);
+    res.writeHead(200, {'Content-Type': 'image/jpg' });
+    let base64data = new Buffer(file, 'binary').toString('base64');
+    res.end(base64data);
+}
+
+function getPath(req) {
+    let path = fsPath;
+    let accessPath = req.body.path.split('/');
+    for (var k in accessPath) {
+        path = path + '\\' + accessPath[k];
+    }
+    return path;
 }
