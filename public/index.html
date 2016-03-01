@@ -3,41 +3,36 @@
     <head>
         <title>PAM3</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="stylesheet" href="app/css/bootstrap.min.css">
+        <link rel="stylesheet" href="app/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="app/css/font-awesome.min.css">
-        <style>
-            body {
-                font-family: monospace;
-                font-size: larger;
-            }
-            li {
-                list-style: none;
-                padding: 8px;
-            }
-            label {
-                margin-left: 7px;
-            }
-        </style>    
+        <link rel="stylesheet" href="app/css/index.css">
+        <script>
+
+        </script>   
         <script data-main="app/app" src="app/lib/require.js"></script>    
         <script type="text/template" id="title_template">        
              <h1>Welcome to <%=app_name %></h1>
              <img id="image"></img>
         </script>
         <script type="text/template" id="file-system-view-template">
-            <h3>Location <%=path %></h3>
+            <h4>Location <%=path %></h4>
             <ul>
                 <% _.each(files, function(file) { %>
                     <li><i class="fa fa-folder"></i><a href="#<%= location %><%= file %>"><label><%= file %></label></a></li>
                 <% }); %>
             </ul>
         </script>
+
         <script type="text/template" id="media-file-view-template">
-                <% if(type == 'audio') { %>
-                    <audio src="<%= src %>"/> 
-                <% } else if (type == 'picture') { %>
-                    <img src="<%= src %>"/>
-                <% } else if (type == 'video') { %>
+                <% if(extn == '.mp3') { %>
+                    <div >Audio File</div>
+                <% } else if (extn == '.jpg') { %>
+                    <img class="col-sm-12" src="data:image/jpg;base64,<%= src %>"/>
+                <% } else if (extn == '.mp4') { %>
                     <video src="<%= src %>"/>
-                <% } else if (type == 'text') { %>
+                <% } else if (extn == '.txt') { %>
                     <div><%= src %></div>                        
                 <% } else { %>
                     <div>File Format doesn't supported</div>
@@ -45,11 +40,15 @@
                         
         </script>
     </head>
-    <body>
+
+    <body class="container">
         <div id="app-name"></div>
-        <a href="#/home">Browse Files and Folders</a>
+        <a href="#/home"><h4>Browse Files and Folders</h4></a>
         <div id="file-system-view"></div>
         <div id="media-view"></div>
-    </body>    
+    </body>
+    <script data-main="app/app" src="app/lib/jquery.js"></script>        
+    <script data-main="app/app" src="app/lib/bootstrap.min.js"></script> 
+    
 </html>
     

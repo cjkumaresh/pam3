@@ -26,8 +26,9 @@
     "express": "^4.13.4",
     "finalhandler": "0.4.1",
     "ip": "1.1.0",
+    "mime-types": "^2.1.10",
     "multer": "^1.1.0",
-    "node-ipc": "6.0.0"    
+    "node-ipc": "6.0.0"
   },
   "devDependencies": {
     "electron-prebuilt": "^0.36.0"
