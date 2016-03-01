@@ -27,9 +27,10 @@ exports.startServer = function (http, fs) {
         sendFileList(req, res, fsPath);        
     });
     
-    app.get('/music', function (req, res) {
+    app.get('/music*', function (req, res) {
         res.set({'Content-Type': 'audio/mpeg'});
-        let readStream = fs.createReadStream('mp3 file name');
+        let path = fsPath + '/' + req.query.path.replace(/pam3/g,'/');
+        let readStream = fs.createReadStream(path);
         readStream.pipe(res);     
     });
     
@@ -73,8 +74,8 @@ function streamFile(req, res, path) {
             res.end(JSON.stringify({'src': 'text file','extn': fileExtn}));
             break;
         case '.mp3':
-            res.setHeader('Content-Type', mime.contentType(path));
-            res.end(JSON.stringify({'src': 'audio file','extn': fileExtn}));
+            let readStream = fs.createReadStream(path);
+            readStream.pipe(res);     
             break;
         case '.mp4':
             res.setHeader('Content-Type', mime.contentType(path));

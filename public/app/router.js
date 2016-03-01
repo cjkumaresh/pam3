@@ -6,19 +6,21 @@ define([
     'models/FilesModel',
     'views/AppView',
     'views/FileSystemView',
-    'views/MediaView'
-],function ($, _, Backbone, FilesModel, AppView, FileSystemView, MediaView) {    
+    'utils/navigation'
+],function ($, _, Backbone, FilesModel, AppView, FileSystemView, Navigation, Audio) {    
     return  Backbone.Router.extend({
         routes: {          
             '': 'defaultRoute',
             'home': 'homeRoute',
-            'home/*path': 'navigateRoute',          
+            'home/*path': 'navigateRoute'       
         },
+        
         defaultRoute: function () {
             new AppView({ 
                 el: $("#app-name") 
             });
         },
+        
         homeRoute: function () {
             new FilesModel().fetch().done(function(files) {
                 new FileSystemView({
@@ -26,22 +28,9 @@ define([
                 });
             });
         },
+        
         navigateRoute: function (path) {
-            $.ajax({
-                url: 'navigate',
-                type: 'POST',
-                data:{'path': path}
-            }).done(function(data) {
-                if (data.files) {
-                    new FileSystemView({
-                        model: data
-                    });    
-                } else {
-                    new MediaView({
-                        model: JSON.parse(data)
-                    });
-                }
-            });
+            Navigation.handle(path);
         }
     }); 
 });

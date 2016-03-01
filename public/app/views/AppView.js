@@ -11,8 +11,8 @@ define([
         },
             
         render: function () {
-            let variables = { app_name: "PAM-3" };
-            let template = _.template( $("#title_template").html() );
+            var variables = { app_name: "PAM-3" };
+            var template = _.template( $("#title_template").html() );
             this.$el.append(template(variables));
         }
     });    
