@@ -1,10 +1,9 @@
 
 html, body {
     height: 100%;
-}
-body {
     font-family: monospace;
-    font-size: larger;
+    font-size: 18px;
+    font-style: italic;
 }
 #app-name {
     height: 10%;
@@ -15,7 +14,18 @@ body {
 li {
     list-style: none;
     padding: 8px;
+    margin-left: -4%;
+}
+li a {
+    margin-left: 10px;
 }
 label {
     margin-left: 7px;
+}
+a {
+    color: #424242;
+}
+#appName {
+    font-size: 20px;
+    color: #F44336;
 }

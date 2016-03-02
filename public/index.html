@@ -8,19 +8,18 @@
         <link rel="stylesheet" href="app/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="app/css/font-awesome.min.css">
         <link rel="stylesheet" href="app/css/index.css">
-        <script>
 
-        </script>   
         <script data-main="app/app" src="app/lib/require.js"></script>    
         <script type="text/template" id="title_template">        
              <h1>Welcome to <%=app_name %></h1>
-             <img id="image"></img>
         </script>
         <script type="text/template" id="file-system-view-template">
             <h4>Location <%=path %></h4>
-            <ul>
+            <ul class="list-group">
                 <% _.each(files, function(file) { %>
-                    <li><i class="fa fa-folder"></i><a href="#<%= location %><%= file %>"><label><%= file %></label></a></li>
+                    <li>
+                        <div class="col-md-8 list-group-item"><i class="fa fa-folder"></i><a href="#<%= location %><%= file %>"><%= file %></a></div>
+                    </li>
                 <% }); %>
             </ul>
         </script>
@@ -42,6 +41,13 @@
     </head>
 
     <body class="container">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">PAM-3</a>
+                </div>
+            </div>
+        </nav>
         <div id="app-name"></div>
         <a href="#/home"><h4>Browse Files and Folders</h4></a>
         <div id="file-system-view"></div>
