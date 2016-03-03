@@ -4,7 +4,10 @@
   "description": "Access / Control your PC from your smart phone within same network",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron main.js",
+    "postinstall": "install-app-deps",
+    "pack": "build",
+    "dist": "build"
   },
   "repository": {
     "type": "git",
@@ -32,5 +35,9 @@
   },
   "devDependencies": {
     "electron-prebuilt": "^0.36.0"
+  },
+  "build": {
+    "app-bundle-id": "pam3_1.0.0",
+    "app-category-type": "desktop-lan-mobile"
   }
 }
