@@ -4,15 +4,20 @@ define([
     'views/FileSystemView',
     'views/MediaView',
     'views/AudioView',
-    'utils/audio'
-],function ($, FileSystemView, MediaView, AudioView, Audio) {
+    'utils/audio',
+    'views/VideoView'
+],function ($, FileSystemView, MediaView, AudioView, Audio, VideoView) {
    return {
        handle: function (path) {
            if (path.endsWith('.mp3')) {
                new AudioView({
                    model: path
                });     
-           } else {
+           } else if (path.endsWith('.mp4')) {
+               new VideoView({
+                   model: path    
+               });
+           }else {
                Audio.stopAudio();
                fileNav(path);
            }
