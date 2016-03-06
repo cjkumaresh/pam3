@@ -1,22 +1,22 @@
 
-html, body {
-    height: 100%;
+* {
     font-family: monospace;
     font-size: 18px;
     font-style: italic;
 }
-#app-name {
-    height: 10%;
+
+body {
+    padding-top: 70px;
 }
-#media-view img {
-    height: 100%;
+.navbar-default {
+    background-color: #2196F3;
 }
-li {
-    list-style: none;
-    padding: 8px;
-    margin-left: -4%;
+#pamBody {
+    -webkit-box-shadow: 3px 0px 71px -7px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 0px 71px -7px rgba(0,0,0,0.75);
+    box-shadow: 3px 0px 71px -7px rgba(0,0,0,0.75);
 }
-li a {
+#view a {
     margin-left: 10px;
 }
 label {
@@ -27,9 +27,11 @@ a {
 }
 #appName {
     font-size: 20px;
-    color: #F44336;
+    color: white;
 }
-
+#location {
+    padding: 10px;
+}
 .files {
     cursor: pointer;
     margin-bottom: -1px !important;

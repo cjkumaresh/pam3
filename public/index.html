@@ -5,42 +5,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <link rel="stylesheet" href="app/css/bootstrap.min.css">
-        <link rel="stylesheet" href="app/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="app/css/font-awesome.min.css">
         <link rel="stylesheet" href="app/css/index.css">
 
         <script data-main="app/app" src="app/lib/require.js"></script>    
-        <script type="text/template" id="title_template">        
-             <h1>Welcome to <%=app_name %></h1>
-        </script>
         <script type="text/template" id="file-system-view-template">
-            <h4>Location <%=path %></h4>
-            <ul class="list-group">
+            <h4 id="location"><strong>Location :</strong> <%=path %></h4>
+            <div class="list-group">
                 <% _.each(files, function(file) { %>
-                    <li>
-                        <div class="files col-sm-12 list-group-item"><i class="fa fa-folder"></i><a href="#<%= location %><%= file %>"><%= file %></a></div>
-                    </li>
+                    <div class="files col-sm-12 list-group-item"><i class="fa fa-folder"></i><a href="#<%= location %><%= file %>"><%= file %></a></div>
                 <% }); %>
             </ul>
         </script>
-
-        <script type="text/template" id="media-file-view-template">
-                <% if(extn == '.mp3') { %>
-                    <div >Audio File</div>
-                <% } else if (extn == '.jpg') { %>
-                    <img class="col-sm-12" src="data:image/jpg;base64,<%= src %>"/>
-                <% } else if (extn == '.mp4') { %>
-                    <video src="<%= src %>"/>
-                <% } else if (extn == '.txt') { %>
-                    <div><%= src %></div>                        
-                <% } else { %>
-                    <div>File Format doesn't supported</div>
-                <% } %>    
-                        
-        </script>
     </head>
 
-    <body class="container">
+    <body>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -48,10 +27,9 @@
                 </div>
             </div>
         </nav>
-        <div id="app-name"></div>
-        <a href="#/home"><h4>Browse Files and Folders</h4></a>
-        <div id="file-system-view"></div>
-        <div id="media-view"></div>
+        <div id="pamBody" class="container">
+            <div class="row" id="view"></div>
+        </div>    
     </body>
     <script data-main="app/app" src="app/lib/jquery.js"></script>        
     <script data-main="app/app" src="app/lib/bootstrap.min.js"></script> 

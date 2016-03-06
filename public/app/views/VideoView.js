@@ -4,7 +4,7 @@ define([
     'backbone',      
 ], function($, _, Backbone) {
      return Backbone.View.extend({
-         el: 'body',
+         el: '#view',
          
          initialize: function () {
              this.$el.find('#file-system-view').html('');
@@ -14,8 +14,8 @@ define([
          
          render: function () {
              var url = '/video?path=' + this.model.replace(/\//g, 'pam3'),
-                 videoSrc = '<video src ="' + url + '" type="video/mp4" controls/>';
-             this.$el.append(videoSrc);
+                 $video = '<video class="col-xs-12" src ="' + url + '" type="video/mp4" controls/>';
+             this.$el.html($video);
          }
          
      });   

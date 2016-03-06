@@ -69,24 +69,20 @@ function streamFile(req, res, path) {
     switch (fileExtn) {
         case '.jpg':
             let base64data = new Buffer(file, 'binary').toString('base64');
+            res.setHeader('Content-Type', 'application/json');
             res.writeHead(200, mime.contentType(path));
             res.end(JSON.stringify({'status': 'success','src': base64data,'extn': fileExtn}));            
             break;
-        case '.txt':
+        case '.txt',
+             '.js',
+             '.doc',
+             '.xls':
             res.setHeader('Content-Type', mime.contentType(path));
-            res.end(JSON.stringify({'src': 'text file','extn': fileExtn}));
+            res.sendFile(path);
             break;
-        case '.mp3':
-            let readStream = fs.createReadStream(path);
-            readStream.pipe(res);     
-            break;
-        case '.mp4':
-            res.setHeader('Content-Type', mime.contentType(path));
-            res.end(JSON.stringify({'src': 'implementation in progress','extn': fileExtn}));
-            break;     
         default:
             res.setHeader('Content-Type', mime.contentType(path));
-            res.end(JSON.stringify({'src': 'file format not supported yet','extn': fileExtn}));
+            res.end(JSON.stringify({'status': 'error','src': 'file format not supported yet','extn': fileExtn}));
             break; 
     }
 }

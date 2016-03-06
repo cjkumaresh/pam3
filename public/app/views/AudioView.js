@@ -6,7 +6,7 @@ define([
     'utils/audio'
 ],function($, _, Backbone, Audio){
     return Backbone.View.extend({
-        el: 'body',
+        el: '#view',
         
         initialize: function () {
             this.$el.find('#file-system-view').html('');  
@@ -14,11 +14,9 @@ define([
         },
         
         render: function () {
-            // Audio.getAudio(this.model);
-            //this.$el.find('#file-system-view').html('');
              var url = '/audio?path=' + this.model.replace(/\//g, 'pam3'),
-                 videoSrc = '<audio src ="' + url + '" type="audio/mp3" controls/>';
-             this.$el.append(videoSrc);
+                 $audio = '<audio class="col-xs-12" src ="' + url + '" type="audio/mp3" controls/>';
+             this.$el.html($audio);
         }
     });
 });
