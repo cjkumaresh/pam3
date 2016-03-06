@@ -9,7 +9,7 @@ define([
         el: '#file-system-view',
         
         events: {
-            'click .list-group-item': 'onClickFile',    
+           // 'click .list-group-item': 'onClickFile',    
         },
         
 

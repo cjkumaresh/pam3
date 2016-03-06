@@ -27,11 +27,14 @@ exports.startServer = function (http, fs) {
         sendFileList(req, res, fsPath);        
     });
     
-    app.get('/music*', function (req, res) {
-        res.set({'Content-Type': 'audio/mpeg'});
-        let path = fsPath + '/' + req.query.path.replace(/pam3/g,'/');
-        let readStream = fs.createReadStream(path);
-        readStream.pipe(res);     
+    app.get('/audio*', function (req, res) {
+        let type = "audio/mp3";
+        streamMediaFile(req, res, type);     
+    });
+    
+    app.get('/video*', function (req, res) {
+        let type = "video/mp4";
+        streamMediaFile(req, res, type);    
     });
     
     app.post('/navigate', function (req, res) {
@@ -86,6 +89,33 @@ function streamFile(req, res, path) {
             res.end(JSON.stringify({'src': 'file format not supported yet','extn': fileExtn}));
             break; 
     }
+}
+
+function streamMediaFile (req, res, type) {
+        let path = fsPath + '/' + req.query.path.replace(/pam3/g,'/');
+        let range = req.headers.range;
+        let positions = range.replace(/bytes=/, "").split("-");
+        let start = parseInt(positions[0], 10);
+
+        fs.stat(path, function(err, stats) {
+            let total = stats.size;
+            let end = positions[1] ? parseInt(positions[1], 10) : total - 1;
+            let chunksize = (end - start) + 1;
+
+            res.writeHead(206, {
+                "Content-Range": "bytes " + start + "-" + end + "/" + total,
+                "Accept-Ranges": "bytes",
+                "Content-Length": chunksize,
+                "Content-Type": type
+            });
+
+            let stream = fs.createReadStream(path, { start: start, end: end })
+            .on("open", function() {
+                stream.pipe(res);
+            }).on("error", function(err) {
+                res.end(err);
+            });
+        });
 }
 
 function getPath(req) {
