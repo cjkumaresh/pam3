@@ -12,8 +12,9 @@ define([
         },
         
         render: function () {
-            var $file = '<div>' + this.model + '</div>';
-            this.$el.html($file);
+            var imgSrc = 'data:image/jpg;base64,' + this.model.src,
+                $img = '<img class="col-xs-12" src="' + imgSrc + '"/>';
+            this.$el.html($img);
         }
     });
 });

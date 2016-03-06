@@ -16,9 +16,7 @@ define([
         },
         
         defaultRoute: function () {
-            new AppView({ 
-                el: $("#app-name") 
-            });
+            location.href = location.href + '#/home';
         },
         
         homeRoute: function () {
