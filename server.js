@@ -92,26 +92,29 @@ function streamMediaFile (req, res, type) {
         let range = req.headers.range;
         let positions = range.replace(/bytes=/, "").split("-");
         let start = parseInt(positions[0], 10);
+        try {
+            fs.stat(path, function(err, stats) {
+                let total = stats.size;
+                let end = positions[1] ? parseInt(positions[1], 10) : total - 1;
+                let chunksize = (end - start) + 1;
 
-        fs.stat(path, function(err, stats) {
-            let total = stats.size;
-            let end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-            let chunksize = (end - start) + 1;
+                res.writeHead(206, {
+                    "Content-Range": "bytes " + start + "-" + end + "/" + total,
+                    "Accept-Ranges": "bytes",
+                    "Content-Length": chunksize,
+                    "Content-Type": type
+                });
 
-            res.writeHead(206, {
-                "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                "Accept-Ranges": "bytes",
-                "Content-Length": chunksize,
-                "Content-Type": type
+                let stream = fs.createReadStream(path, { start: start, end: end })
+                .on("open", function() {
+                    stream.pipe(res);
+                }).on("error", function(err) {
+                    res.end(err);
+                });
             });
-
-            let stream = fs.createReadStream(path, { start: start, end: end })
-            .on("open", function() {
-                stream.pipe(res);
-            }).on("error", function(err) {
-                res.end(err);
-            });
-        });
+        } catch (err) {
+            throw err;
+        }
 }
 
 function getPath(req) {
