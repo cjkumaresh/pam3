@@ -88,33 +88,34 @@ function streamFile(req, res, path) {
 }
 
 function streamMediaFile (req, res, type) {
-        let path = fsPath + '/' + req.query.path.replace(/pam3/g,'/');
-        let range = req.headers.range;
-        let positions = range.replace(/bytes=/, "").split("-");
-        let start = parseInt(positions[0], 10);
-        try {
-            fs.stat(path, function(err, stats) {
-                let total = stats.size;
-                let end = positions[1] ? parseInt(positions[1], 10) : total - 1;
-                let chunksize = (end - start) + 1;
+    
+    let path = fsPath + '/' + req.query.path.replace(/pam3/g,'/');
+    let range = req.headers.range;
+    let positions = range.replace(/bytes=/, "").split("-");
+    let start = parseInt(positions[0], 10);
+    try {
+        fs.stat(path, function(err, stats) {
+            let total = stats.size;
+            let end = positions[1] ? parseInt(positions[1], 10) : total - 1;
+            let chunksize = (end - start) + 1;
 
-                res.writeHead(206, {
-                    "Content-Range": "bytes " + start + "-" + end + "/" + total,
-                    "Accept-Ranges": "bytes",
-                    "Content-Length": chunksize,
-                    "Content-Type": type
-                });
-
-                let stream = fs.createReadStream(path, { start: start, end: end })
-                .on("open", function() {
-                    stream.pipe(res);
-                }).on("error", function(err) {
-                    res.end(err);
-                });
+            res.writeHead(206, {
+                "Content-Range": "bytes " + start + "-" + end + "/" + total,
+                "Accept-Ranges": "bytes",
+                "Content-Length": chunksize,
+                "Content-Type": type
             });
-        } catch (err) {
-            throw err;
-        }
+
+            let stream = fs.createReadStream(path, { start: start, end: end })
+            .on("open", function() {
+                stream.pipe(res);
+            }).on("error", function(err) {
+                res.end(err);
+            });
+        });
+    } catch (err) {
+        throw err;
+    }
 }
 
 function getPath(req) {
