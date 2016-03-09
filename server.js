@@ -88,11 +88,12 @@ function streamFile(req, res, path) {
 }
 
 function streamMediaFile (req, res, type) {
-        let path = fsPath + '/' + req.query.path.replace(/pam3/g,'/');
-        let range = req.headers.range;
-        let positions = range.replace(/bytes=/, "").split("-");
-        let start = parseInt(positions[0], 10);
-
+    
+    let path = fsPath + '/' + req.query.path.replace(/pam3/g,'/');
+    let range = req.headers.range;
+    let positions = range.replace(/bytes=/, "").split("-");
+    let start = parseInt(positions[0], 10);
+    try {
         fs.stat(path, function(err, stats) {
             let total = stats.size;
             let end = positions[1] ? parseInt(positions[1], 10) : total - 1;
@@ -112,6 +113,9 @@ function streamMediaFile (req, res, type) {
                 res.end(err);
             });
         });
+    } catch (err) {
+        throw err;
+    }
 }
 
 function getPath(req) {
