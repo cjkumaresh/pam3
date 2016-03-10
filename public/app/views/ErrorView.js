@@ -1,9 +1,7 @@
 'use strict';
 define([
-    'jquery',
-    'underscore',
     'backbone'
-],function($, _, Backbone){
+],function(Backbone){
     return Backbone.View.extend({
         el: '#view',
                
