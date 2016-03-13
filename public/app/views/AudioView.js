@@ -1,10 +1,8 @@
 'use strict';
 define([
-    'jquery',
-    'underscore',
     'backbone',
     'utils/audio'
-],function($, _, Backbone, Audio){
+],function(Backbone, Audio){
     return Backbone.View.extend({
         el: '#view',
         
