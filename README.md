@@ -10,10 +10,10 @@ Note:
 
 You need to have nodejs installed https://nodejs.org/en/download/
 
-Fork the repo 
-cd /pam3
+Fork the repo and clone the repo 
+`cd /pam3
 npm install
-npm start
+npm start`
 
 ##Contribution
 
