@@ -37,6 +37,6 @@ exports.startServer = function (http, fs) {
     });
 
     app.listen(config.port, function () {
-        console.log('Example app listening on port', config.port);
+        console.log('PAM is listening on port', config.port);
     });    
 };
