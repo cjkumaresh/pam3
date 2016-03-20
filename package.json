@@ -1,10 +1,10 @@
 {
   "name": "pam3",
   "version": "1.0.0",
-  "description": "Access / Control your PC from your smart phone within same network",
-  "main": "main.js",
+  "description": "Access your PC from devices within same network",
+  "main": "app.js",
   "scripts": {
-    "start": "electron main.js",
+    "start": "node app.js",
     "postinstall": "install-app-deps",
     "pack": "build",
     "dist": "build"
@@ -14,7 +14,6 @@
     "url": "https://github.com/cjkumaresh/pam3.git"
   },
   "keywords": [
-    "electron",
     "remote PC",
     "mobile"
   ],
@@ -32,12 +31,5 @@
     "mime-types": "^2.1.10",
     "multer": "^1.1.0",
     "node-ipc": "6.0.0"
-  },
-  "devDependencies": {
-    "electron-prebuilt": "^0.36.0"
-  },
-  "build": {
-    "app-bundle-id": "pam3_1.0.0",
-    "app-category-type": "desktop-lan-mobile"
   }
 }

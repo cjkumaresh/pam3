@@ -3,8 +3,8 @@
 Access the files in your PC from devices within same network through browser
 
 Note:
-     - `1. Tested in firefox for Android OS`
-     - `2. Tested in chrome for iOS`
+     - `Tested in firefox for Android OS`
+     - `Tested in chrome for iOS`
 
 ##Installation
 
