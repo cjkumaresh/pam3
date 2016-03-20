@@ -11,11 +11,12 @@ define([
 ],function ($, ErrorView, FileSystemView, MediaView, AudioView, Audio, VideoView, ImageView) {
    return {
        handle: function (path) {
+           path = path.toLowerCase();
            if (path.endsWith('.mp3')) {
                new AudioView({
                    model: path
                });     
-           } else if (path.endsWith('.mp4') || path.endsWith('.MKV') || path.endsWith('.mkv')) {
+           } else if (path.endsWith('.mp4') || path.endsWith('.mkv')) {
                new VideoView({
                    model: path    
                });
