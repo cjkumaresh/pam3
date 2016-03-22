@@ -4,7 +4,9 @@ const config = require('./config.json'),
     http = require('http'),
     fileOps = require('./lib/utils/file-ops'),
     bodyParser = require('body-parser'),
-    app = express();    
+    app = express(),
+    open = require("open"),
+    ip = require('ip');    
     
 const fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 
@@ -37,6 +39,8 @@ exports.startServer = function (http, fs) {
     });
 
     app.listen(config.port, function () {
-        console.log('PAM is listening on port', config.port);
+        let url = 'http://' + ip.address() + ':' + config.port;
+        open(url);
+        console.log('PAM is accessible @ ', url);
     });    
 };
