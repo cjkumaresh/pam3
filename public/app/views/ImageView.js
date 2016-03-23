@@ -11,7 +11,7 @@ define([
         
         render: function () {
             var imgSrc = 'data:image/jpg;base64,' + this.model.src,
-                $img = '<img class="col-xs-12" src="' + imgSrc + '"/>';
+                $img = '<img class="col-xs-12 media" src="' + imgSrc + '"/>';
             this.$el.html($img);
         }
     });

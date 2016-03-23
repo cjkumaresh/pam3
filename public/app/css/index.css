@@ -7,9 +7,11 @@
 
 body {
     padding-top: 70px;
+    background: #565656;
+    color: white
 }
 .navbar-default {
-    background-color: #2196F3;
+    background-color: #063F6C;
 }
 #pamBody {
     -webkit-box-shadow: 3px 0px 71px -7px rgba(0,0,0,0.75);
@@ -23,7 +25,7 @@ label {
     margin-left: 7px;
 }
 a {
-    color: #424242;
+    color: white;
 }
 #appName {
     font-size: 20px;
@@ -35,4 +37,13 @@ a {
 .files {
     cursor: pointer;
     margin-bottom: -1px !important;
+    background: #3B3B3B;
+    color: white
+}
+.list-group-item {
+    border: 1px solid #676262; 
+}
+.media {
+    padding-left: 0px;
+    padding-right: 0px;
 }

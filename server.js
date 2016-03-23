@@ -2,6 +2,7 @@
 const config = require('./config.json'),
     express = require('express'),
     http = require('http'),
+    fs = require('fs'),
     fileOps = require('./lib/utils/file-ops'),
     bodyParser = require('body-parser'),
     app = express(),
@@ -10,7 +11,7 @@ const config = require('./config.json'),
     
 const fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 
-exports.startServer = function (http, fs) {    
+exports.startServer = function () {    
     //initialize server
     app.use(express.static('public'));
     app.use(bodyParser.json()); // for parsing application/json

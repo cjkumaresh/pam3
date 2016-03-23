@@ -13,7 +13,7 @@ define([
         
         render: function () {
              var url = '/audio?path=' + this.model.replace(/\//g, 'pam3'),
-                 $audio = '<audio class="col-xs-12" src ="' + url + '" type="audio/mp3" controls/>';
+                 $audio = '<audio class="col-xs-12 media" src ="' + url + '" type="audio/mp3" controls/>';
              this.$el.html($audio);
         }
     });
