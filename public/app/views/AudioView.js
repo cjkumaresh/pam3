@@ -1,8 +1,7 @@
 'use strict';
 define([
-    'backbone',
-    'utils/audio'
-],function(Backbone, Audio){
+    'backbone'
+], function (Backbone) {
     return Backbone.View.extend({
         el: '#view',
         

@@ -1,6 +1,6 @@
 define([
     'backbone',      
-], function(Backbone) {
+], function (Backbone) {
      return Backbone.View.extend({
          el: '#view',
          

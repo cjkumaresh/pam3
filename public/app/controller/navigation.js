@@ -5,10 +5,9 @@ define([
     'views/FileSystemView',
     'views/MediaView',
     'views/AudioView',
-    'utils/audio',
     'views/VideoView',
     'views/ImageView'
-],function ($, ErrorView, FileSystemView, MediaView, AudioView, Audio, VideoView, ImageView) {
+],function ($, ErrorView, FileSystemView, MediaView, AudioView, VideoView, ImageView) {
    return {
        handle: function (path) {
            path = path.toLowerCase();
