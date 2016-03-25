@@ -2,7 +2,6 @@
 
 Access the files in your PC from devices within same network through browser
 
-Note:
      - `Tested in firefox for Android OS`
      - `Tested in chrome for iOS`
 
