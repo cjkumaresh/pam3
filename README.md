@@ -1,4 +1,4 @@
-# pam3
+# pam3 [![Codacy Badge](https://api.codacy.com/project/badge/grade/211c83e6ecc343b39cb0cd10c36871e2)](https://www.codacy.com/app/cjkumaresh/pam3)
 
 Access the files in your PC from devices within same network through browser
 
