@@ -4,10 +4,10 @@ define([
     'underscore',
     'backbone',
     'views/AppView',
-    'router'    
+    'router'
 ], function ($, _, Backbone, AppView, AppRouter) {
-        
-    new AppRouter();            
+
+    new AppRouter();
     Backbone.history.start();
-    
+
 });
