@@ -14,6 +14,12 @@ Fork the repo and clone the repo
 - `npm install`
 - `npm start`
 
+##TODO
+- `bread crumb navigation`
+- `swipe navigation for media files`
+- `proper icons for supported file types`
+- `support to access all files and folders`
+
 ##Contribution
 
 Any kind of contributions are welcome :)
