@@ -7,58 +7,59 @@ define([
     'views/AudioView',
     'views/VideoView',
     'views/ImageView'
-],function ($, ErrorView, FileSystemView, MediaView, AudioView, VideoView, ImageView) {
-   return {
-       handle: function (path) {
-           path = path.toLowerCase();
-           if (path.endsWith('.mp3')) {
-               new AudioView({
-                   model: path
-               });     
-           } else if (path.endsWith('.mp4') || path.endsWith('.mkv')) {
-               new VideoView({
-                   model: path    
-               });
-           } else {
-               fileNav(path);
-           }
-       }
-   } 
-    function fileNav (path) {
-        var params = {
+], function ($, ErrorView, FileSystemView, MediaView, AudioView, VideoView, ImageView) {
+    return {
+        handle: function (path) {
+            var ext = path.slice((path.lastIndexOf(".") - 1 >>> 0) + 2).toLowerCase(),
+                data = {
+                    model: path
+                };
+
+            switch (ext) {
+                case 'mp3':
+                    new AudioView(data);
+                    break;
+
+                case 'mp4':
+                case 'mkv':
+                    new VideoView(data);
+                    break;
+
+                case 'jpg':
+                case 'jpeg':
+                case 'png':
+                    new ImageView(data);
+                    break;
+                    
+                case 'txt':
+                case 'doc':
+                case 'docx':
+                case 'xls':
+                case 'xlsx':
+                    new MediaView(data);
+                    break;
+                    
+                default:
+                    renderCommonView(path);
+                    break;
+            };
+
+        }
+    }
+
+    function renderCommonView (path) {
+
+        $.ajax({
             url: 'navigate',
             type: 'POST',
-            data: {'path': path}
-        },
+            data: { 'path': path }
+        })
         
-        callback = function (response, status, xhr) {
-            var ct = xhr.getResponseHeader('content-type') || '';
-            if (response.files) {
-                new FileSystemView({
-                    model: response
-                });    
-            } else if (ct.indexOf('text') > -1) {
-                new MediaView({
-                    model: response
-                });
-            } else if (ct.indexOf('json') > -1) {
-                if (response.status === 'error') {
-                    new ErrorView({
-                        model: response.src
-                    });    
-                } else {
-                    new ImageView({
-                        model: response 
-                    });
-                }
-            } else {
-                new ErrorView({
-                    model: 'File format not supported or Something went wrong'
-                });
-            }
-        };
+        .done(function (res) {
+            new FileSystemView({ model: res });
+        })
         
-        $.ajax(params).done(callback).error(function (response) {
+        .error(function (response) {
             new ErrorView({
                 model: response.responseText.split(',')[0]
             });

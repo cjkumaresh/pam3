@@ -30,13 +30,18 @@ exports.startServer = function () {
         let type = "video/mp4";
         fileOps.streamMediaFile(req, res, fsPath, type);
     });
+    
+    app.get('/image*', function (req, res) {
+        fileOps.streamImageFile(req, res, fsPath);
+    });
+    
+    app.get('/file*', function (req, res) {
+        fileOps.streamFile(req, res, fsPath);
+    });
 
     app.post('/navigate', function (req, res) {
-        if (!req.body)
-            return res.sendStatus(400);
-        let path = fileOps.getPath(req, fsPath),
-            type = fs.lstatSync(path);
-        (type.isDirectory()) ? fileOps.sendFileList(req, res, path) : fileOps.streamFile(req, res, path);
+        let path = fileOps.getPath(req, fsPath);
+        fileOps.sendFileList(req, res, path);
     });
 
     app.listen(config.port, function () {
