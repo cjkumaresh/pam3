@@ -2,8 +2,8 @@
 
 Access the files in your PC from devices within same network through browser
 
-- `Tested in firefox for Android OS`
-- `Tested in chrome for iOS`
+- Tested in firefox for Android OS
+- Tested in chrome for iOS
 
 ##Installation
 
@@ -15,10 +15,10 @@ Fork the repo and clone the repo
 - `npm start`
 
 ##TODO
-- `bread crumb navigation`
-- `swipe navigation for media files`
-- `proper icons for supported file types`
-- `support to access all files and folders`
+- bread crumb navigation
+- swipe navigation for media files
+- proper icons for supported file types
+- support to access all files and folders
 
 ##Contribution
 
