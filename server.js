@@ -12,10 +12,10 @@ const config = require('./config.json'),
 const fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 
 exports.startServer = function () {    
-    //initialize server
+    
     app.use(express.static('public'));
-    app.use(bodyParser.json()); // for parsing application/json
-    app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
         
     app.get('/getFiles', function (req, res) {
         fileOps.sendFileList(req, res, fsPath);
