@@ -4,7 +4,7 @@ define([
     'underscore',
     'backbone',
     'models/FilesModel'
-],function ($, _, Backbone, FilesModel) {    
+], function ($, _, Backbone, FilesModel) {    
     return Backbone.View.extend({
         el: '#view',
         

@@ -1,10 +1,9 @@
-# pam3
+# pam3 [![Codacy Badge](https://api.codacy.com/project/badge/grade/211c83e6ecc343b39cb0cd10c36871e2)](https://www.codacy.com/app/cjkumaresh/pam3)
 
 Access the files in your PC from devices within same network through browser
 
-Note:
-     - `1. Tested in firefox for Android OS`
-     - `2. Tested in chrome for iOS`
+- Tested in firefox for Android OS
+- Tested in chrome for iOS
 
 ##Installation
 
@@ -14,6 +13,12 @@ Fork the repo and clone the repo
 - `cd /pam3`
 - `npm install`
 - `npm start`
+
+##TODO
+- bread crumb navigation
+- swipe navigation for media files
+- proper icons for supported file types
+- support to access all files and folders
 
 ##Contribution
 

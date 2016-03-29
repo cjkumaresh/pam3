@@ -1,38 +1,42 @@
 <!DOCTYPE html>
-<html>   
-    <head>
-        <title>PAM3</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <link rel="stylesheet" href="app/css/bootstrap.min.css">
-        <link rel="stylesheet" href="app/css/font-awesome.min.css">
-        <link rel="stylesheet" href="app/css/index.css">
+<html>
 
-        <script data-main="app/app" src="app/lib/require.js"></script>    
-        <script type="text/template" id="file-system-view-template">
-            <h4 id="location"><strong>Location :</strong> <%=path %></h4>
-            <div class="list-group">
-                <% _.each(files, function(file) { %>
-                    <div class="files col-sm-12 list-group-item"><i class="fa fa-folder"></i><a href="#<%= location %><%= file %>"><%= file %></a></div>
-                <% }); %>
-            </ul>
-        </script>
-    </head>
+<head>
+    <title>PAM3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <body>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a id="appName" class="navbar-brand" href="#">PAM-3</a>
+    <link rel="stylesheet" href="app/css/bootstrap.min.css">
+    <link rel="stylesheet" href="app/css/font-awesome.min.css">
+    <link rel="stylesheet" href="app/css/index.css">
+
+    <script data-main="app/app" src="app/lib/require.js"></script>
+    <script type="text/template" id="file-system-view-template">
+        <h4 id="location"><strong>Location :</strong> <%=path %></h4>
+        <div class="list-group">
+            <% _.each(files, function(file) { %>
+                <div class="files col-sm-12 list-group-item"><i class="fa fa-folder"></i>
+                    <a href="#<%= location %><%= file %>">
+                        <%= file %>
+                    </a>
                 </div>
+            <% }); %>
+        </div>
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a id="appName" class="navbar-brand" href="#">PAM-3</a>
             </div>
-        </nav>
-        <div id="pamBody" class="container">
-            <div class="row" id="view"></div>
-        </div>    
-    </body>
-    <script data-main="app/app" src="app/lib/jquery.js"></script>        
-    <script data-main="app/app" src="app/lib/bootstrap.min.js"></script> 
-    
+        </div>
+    </nav>
+    <div id="pamBody" class="container">
+        <div class="row" id="view"></div>
+    </div>
+</body>
+<script data-main="app/app" src="app/lib/jquery.js"></script>
+<script data-main="app/app" src="app/lib/bootstrap.min.js"></script>
+
 </html>
-    

@@ -1,7 +1,7 @@
 'use strict';
 define([
     'backbone'
-],function(Backbone) {
+], function (Backbone) {
     return Backbone.View.extend({
         el: '#view',
         
@@ -10,9 +10,9 @@ define([
         },
         
         render: function () {
-            var imgSrc = 'data:image/jpg;base64,' + this.model.src,
-                $img = '<img class="col-xs-12" src="' + imgSrc + '"/>';
-            this.$el.html($img);
+             var url = '/image?path=' + this.model.replace(/\//g, 'pam3'),
+                 $image = '<img class="col-xs-12 media" src ="' + url + '"/>';
+             this.$el.html($image);
         }
     });
 });
