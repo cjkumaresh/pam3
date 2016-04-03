@@ -9,7 +9,7 @@ const config = require('./config.json'),
     open = require("open"),
     ip = require('ip');
 
-const fsPath = process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+const fsPath = config.homePath || process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 
 exports.startServer = function () {    
     
