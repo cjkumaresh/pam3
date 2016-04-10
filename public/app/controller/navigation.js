@@ -49,16 +49,10 @@ define([
 
     function renderCommonView (path) {
 
-        $.ajax({
-            url: 'navigate',
-            type: 'POST',
-            data: { 'path': path }
-        })
-        
+        $.ajax({ url: 'navigate', type: 'POST', data: { 'path': path }} )
         .done(function (res) {
             new FileSystemView({ model: res });
         })
-        
         .error(function (response) {
             new ErrorView({
                 model: response.responseText.split(',')[0]

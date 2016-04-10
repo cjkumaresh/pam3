@@ -18,7 +18,6 @@ Fork the repo and clone the repo
 - `"homePath": "..."`
 
 ##TODO
-- bread crumb navigation
 - swipe navigation for media files
 - proper icons for supported file types
 - support to access all files and folders

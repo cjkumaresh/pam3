@@ -1,8 +1,8 @@
 'use strict';
 define([
-    'backbone'
-], function (Backbone) {
-    return Backbone.View.extend({
+    'views/AppView'
+], function (AppView) {
+    return AppView.extend({
         el: '#view',
 
         initialize: function () {

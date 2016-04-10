@@ -12,6 +12,7 @@ define([
         routes: {
             '': 'defaultRoute',
             'home': 'homeRoute',
+            'home/': 'homeRoute',
             'home/*path': 'navigateRoute'
         },
 

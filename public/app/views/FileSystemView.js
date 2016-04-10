@@ -2,14 +2,16 @@
 define([
     'jquery',
     'underscore',
-    'backbone',
+    'views/AppView',
     'models/FilesModel'
-], function ($, _, Backbone, FilesModel) {    
-    return Backbone.View.extend({
+], function ($, _, AppView, FilesModel) {    
+    return AppView.extend({
         el: '#view',
         
         initialize: function () {
-            this.model.location = location.href.split('#')[1] + "/";    
+            this.model.location = location.href.split('#')[1] + "/";
+            $('#nav-breadcrumb ol').html('');
+            this.updateNav();    
             this.render();
         },
         
@@ -18,10 +20,20 @@ define([
             this.$el.html(fileSystemTemplate(this.model));
             return this;
         },
-               
-        onClickFile: function (event) {
-            location.href = $(event.target).find('a').attr('href');
+        
+        updateNav: function () {
+            
+            var link = '#/';
+            _.each(this.model.location.split('/'), function (element) {
+                if (element !== '') {
+                    var $li= $('<li><a href=""></a></li>');
+                    link = link + element + '/';
+                    $li.find('a').attr('href', link).html(element); 
+                    $('#nav-breadcrumb ol').append($li); 
+                }
+            });
         }
+        
         
     });    
 });
