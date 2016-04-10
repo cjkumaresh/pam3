@@ -1,5 +1,5 @@
 'use strict';
-const config = require('./config.json'),
+var config = require('./config.json'),
     express = require('express'),
     http = require('http'),
     fs = require('fs'),
@@ -9,7 +9,7 @@ const config = require('./config.json'),
     open = require("open"),
     ip = require('ip');
 
-const fsPath = config.homePath || process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+var fsPath = config.homePath || process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 
 exports.startServer = function () {    
     
@@ -22,12 +22,12 @@ exports.startServer = function () {
     });
 
     app.get('/audio*', function (req, res) {
-        let type = "audio/mp3";
+        var type = "audio/mp3";
         fileOps.streamMediaFile(req, res, fsPath, type);
     });
 
     app.get('/video*', function (req, res) {
-        let type = "video/mp4";
+        var type = "video/mp4";
         fileOps.streamMediaFile(req, res, fsPath, type);
     });
     
@@ -40,12 +40,12 @@ exports.startServer = function () {
     });
 
     app.post('/navigate', function (req, res) {
-        let path = fileOps.getPath(req, fsPath);
+        var path = fileOps.getPath(req, fsPath);
         fileOps.sendFileList(req, res, path);
     });
 
     app.listen(config.port, function () {
-        let url = 'http://' + ip.address() + ':' + config.port;
+        var url = 'http://' + ip.address() + ':' + config.port;
         open(url);
         console.log('PAM is accessible @ ', url);
     });

@@ -35,7 +35,7 @@ define([
         },
         
         fetchFiles: function() {
-            let that = this;
+            var that = this;
             $.ajax({ url: 'navigate', type: 'POST', data: { 'path': this.model.path } })
                 .done(function(res) {
                     that.model = res;
