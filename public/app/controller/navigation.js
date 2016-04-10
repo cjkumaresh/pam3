@@ -12,7 +12,9 @@ define([
         handle: function (path) {
             var ext = path.slice((path.lastIndexOf(".") - 1 >>> 0) + 2).toLowerCase(),
                 data = {
-                    model: path
+                    model: {
+                        'path': path
+                    }
                 };
 
             switch (ext) {
@@ -30,7 +32,7 @@ define([
                 case 'png':
                     new ImageView(data);
                     break;
-                    
+
                 case 'txt':
                 case 'doc':
                 case 'docx':
@@ -40,29 +42,11 @@ define([
                     break;
                     
                 default:
-                    renderCommonView(path);
+                    new FileSystemView(data);
                     break;
             };
 
         }
     }
 
-    function renderCommonView (path) {
-
-        $.ajax({
-            url: 'navigate',
-            type: 'POST',
-            data: { 'path': path }
-        })
-        
-        .done(function (res) {
-            new FileSystemView({ model: res });
-        })
-        
-        .error(function (response) {
-            new ErrorView({
-                model: response.responseText.split(',')[0]
-            });
-        });
-    }
 });

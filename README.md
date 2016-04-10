@@ -1,4 +1,4 @@
-# pam3 [![Codacy Badge](https://api.codacy.com/project/badge/grade/211c83e6ecc343b39cb0cd10c36871e2)](https://www.codacy.com/app/cjkumaresh/pam3)
+# pam3 [![Code Climate](https://codeclimate.com/github/cjkumaresh/pam3/badges/gpa.svg)](https://codeclimate.com/github/cjkumaresh/pam3) [![Build Status](https://travis-ci.org/cjkumaresh/pam3.svg?branch=master)](https://travis-ci.org/cjkumaresh/pam3)
 
 Access the files in your PC from devices within same network through browser
 
@@ -10,12 +10,14 @@ Access the files in your PC from devices within same network through browser
 You need to have nodejs installed https://nodejs.org/en/download/
 
 Fork the repo and clone the repo 
-- `cd /pam3`
+- `cd pam3`
 - `npm install`
 - `npm start`
 
+###Set the home path in `config.json`
+- `"homePath": "..."`
+
 ##TODO
-- bread crumb navigation
 - swipe navigation for media files
 - proper icons for supported file types
 - support to access all files and folders

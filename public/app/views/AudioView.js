@@ -1,8 +1,8 @@
 'use strict';
 define([
-    'backbone'
-], function (Backbone) {
-    return Backbone.View.extend({
+    'views/AppView'
+], function (AppView) {
+    return AppView.extend({
         el: '#view',
         
         initialize: function () {
@@ -11,7 +11,7 @@ define([
         },
         
         render: function () {
-             var url = '/audio?path=' + this.model.replace(/\//g, 'pam3'),
+             var url = '/audio?path=' + this.model.path.replace(/\//g, 'pam3'),
                  $audio = '<audio class="col-xs-12 media" src ="' + url + '" type="audio/mp3" controls/>';
              this.$el.html($audio);
         }

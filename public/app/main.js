@@ -8,6 +8,7 @@ define([
 ], function ($, _, Backbone, AppView, AppRouter) {
 
     new AppRouter();
+    new AppView();
     Backbone.history.start();
 
 });

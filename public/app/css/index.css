@@ -13,6 +13,12 @@ body {
 .navbar-default {
     background-color: #063F6C;
 }
+#nav-breadcrumb ol {
+    background-color: #063F6C;
+    margin-bottom: 0px;
+    margin-top: 3px;
+}
+
 #pamBody {
     -webkit-box-shadow: 3px 0px 71px -7px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 0px 71px -7px rgba(0,0,0,0.75);
