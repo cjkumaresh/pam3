@@ -1,4 +1,4 @@
-# pam3 [![Code Climate](https://codeclimate.com/github/cjkumaresh/pam3/badges/gpa.svg)](https://codeclimate.com/github/cjkumaresh/pam3)
+# pam3 [![Code Climate](https://codeclimate.com/github/cjkumaresh/pam3/badges/gpa.svg)](https://codeclimate.com/github/cjkumaresh/pam3) [![Build Status](https://travis-ci.org/cjkumaresh/pam3.svg?branch=master)](https://travis-ci.org/cjkumaresh/pam3)
 
 Access the files in your PC from devices within same network through browser
 
