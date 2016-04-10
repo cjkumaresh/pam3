@@ -12,7 +12,7 @@ define([
         },
 
         render: function () {
-            var url = '/video?path=' + this.model.replace(/\//g, 'pam3'),
+            var url = '/video?path=' + this.model.path.replace(/\//g, 'pam3'),
                 $video = '<video class="col-xs-12 media" src ="' + url + '" type="video/mp4" controls/>';
             this.$el.html($video);
         }

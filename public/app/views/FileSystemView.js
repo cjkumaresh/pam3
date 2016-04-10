@@ -3,8 +3,8 @@ define([
     'jquery',
     'underscore',
     'views/AppView',
-    'models/FilesModel'
-], function ($, _, AppView, FilesModel) {    
+    'views/ErrorView'
+], function ($, _, AppView, ErrorView) {    
     return AppView.extend({
         el: '#view',
         
@@ -12,17 +12,17 @@ define([
             this.model.location = location.href.split('#')[1] + "/";
             $('#nav-breadcrumb ol').html('');
             this.updateNav();    
-            this.render();
+            this.fetchFiles();
         },
         
         render: function () {
             var fileSystemTemplate = _.template($("#file-system-view-template").html());
+            this.model.location = location.href.split('#')[1] + "/";
             this.$el.html(fileSystemTemplate(this.model));
             return this;
         },
         
-        updateNav: function () {
-            
+        updateNav: function () {            
             var link = '#/';
             _.each(this.model.location.split('/'), function (element) {
                 if (element !== '') {
@@ -32,8 +32,21 @@ define([
                     $('#nav-breadcrumb ol').append($li); 
                 }
             });
-        }
+        },
         
+        fetchFiles: function() {
+            let that = this;
+            $.ajax({ url: 'navigate', type: 'POST', data: { 'path': this.model.path } })
+                .done(function(res) {
+                    that.model = res;
+                    that.render();
+                })
+                .error(function(response) {
+                    new ErrorView({
+                        model: response.responseText.split(',')[0]
+                    });
+                });
+        }
         
     });    
 });
