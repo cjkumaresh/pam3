@@ -1,7 +1,4 @@
 languages:
   JavaScript: true
 exclude_paths:
-- "public/app/lib/backbone.js"
-- "public/app/lib/bootstrap.min.js"
-- "public/app/lib/require.js"
-- "public/app/lib/underscore.js"
+- "public/app/lib/*"
