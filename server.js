@@ -11,8 +11,7 @@ var config = require('./config.json'),
 
 var fsPath = config.homePath || process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 
-exports.startServer = function () {    
-    
+exports.startServer = function () {
     app.use(express.static('public'));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
