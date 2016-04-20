@@ -20,12 +20,11 @@ define([
         },
 
         homeRoute: function () {
-            var data = {
+            new FileSystemView({
                 model: {
                     'path': ''
                 }
-            };
-            new FileSystemView(data);
+            });
         },
 
         navigateRoute: function (path) {

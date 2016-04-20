@@ -5,7 +5,6 @@ requirejs.config({
         underscore: 'lib/underscore',
         backbone: 'lib/backbone'
     }
-
 });
 
 requirejs(['main']);
