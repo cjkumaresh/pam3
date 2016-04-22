@@ -9,7 +9,7 @@ var config = require('./config.json'),
     open = require("open"),
     ip = require('ip');
 
-var fsPath = config.homePath || process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+var fsPath = config.homePath || process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'];
 
 exports.startServer = function () {
     app.use(express.static('public'));
