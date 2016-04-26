@@ -30,7 +30,9 @@
     "open": "0.0.5"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "gulp": "^3.9.1",
-    "gulp-eslint": "^2.0.0"
+    "gulp-eslint": "^2.0.0",
+    "gulp-mocha": "^2.2.0"
   }
 }
