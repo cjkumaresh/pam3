@@ -39,6 +39,8 @@ define([
             $.ajax({ url: 'navigate', type: 'POST', data: { 'path': this.model.path } })
                 .done(function(res) {
                     that.model = res;
+                    that.files = res.files;
+                    sessionStorage.setItem("pam-files", JSON.stringify(res.files));
                     that.render();
                 })
                 .error(function(response) {
