@@ -43,6 +43,6 @@ define([
                 location.href = url.join("/");
             }
              
-        },
+        }
     });    
 }); 
