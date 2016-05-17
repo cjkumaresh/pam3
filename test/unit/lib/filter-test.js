@@ -3,6 +3,6 @@ var assert = require('chai').assert,
 
 describe('filter', function() {
     it('should return true for pam supported files', function () {
-      assert.deepEqual(filter.getProperFiles("E:\Musics",["Vennilave.mp3"]), ["Vennilave.mp3"]);
+      assert.deepEqual(filter.getProperFiles("E:\Musics",["Vennilave.mp3", "invalid.lol"]), ["Vennilave.mp3"]);
     });
 });
