@@ -1,7 +1,7 @@
 define([
     'jquery'
-], function($) {
-    var swipe = function(swipeDirection) {
+], function ($) {
+    var swipe = function (swipeDirection) {
         var currentFile = "";
         var url = location.href.split("/");
         var index = 0;
