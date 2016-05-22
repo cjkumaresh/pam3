@@ -19,9 +19,9 @@ define([
         },
             
         render: function () {
-            if (this.model.frequentHomePaths.length == 0) { 
+            if (this.model.frequentHomePaths.length !== 0) { 
                 var homeMenuTemplate = _.template($('#home-menu-template').html());
-                this.$el.find('#homeMenu').append(homeMenuTemplate(this.model));
+                this.$el.find('.navbar-header').append(homeMenuTemplate(this.model));
             }
         },
         

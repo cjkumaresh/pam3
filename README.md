@@ -22,6 +22,7 @@ Fork the repo and clone the repo
 ##TODO
 - swipe navigation for media files
 - proper icons for supported file types
+- create an executable to avoid node dependency
 
 ##Contribution
 
