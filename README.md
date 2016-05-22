@@ -14,13 +14,14 @@ Fork the repo and clone the repo
 - `npm install`
 - `npm start`
 
-###Set the home path in `config.json`
-- `"homePath": "..."`
+###Configure path in `config.json`
+- `"homePath": '...'`
+- `frequentHomePaths: ['..','..']`
+
 
 ##TODO
 - swipe navigation for media files
 - proper icons for supported file types
-- support to access all files and folders
 
 ##Contribution
 

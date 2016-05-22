@@ -7,17 +7,17 @@ define([
 ], function ($, _, AppView, ErrorView) {    
     return AppView.extend({
         el: '#view',
-        
+
         initialize: function () {
-            this.model.location = location.href.split('#')[1] + "/";
+            this.model.location = location.href.split('#')[1] + '/';
             $('#nav-breadcrumb ol').html('');
             this.updateNav();    
             this.fetchFiles();
         },
         
         render: function () {
-            var fileSystemTemplate = _.template($("#file-system-view-template").html());
-            this.model.location = location.href.split('#')[1] + "/";
+            var fileSystemTemplate = _.template($('#file-system-view-template').html());
+            this.model.location = location.href.split('#')[1] + '/';
             this.$el.html(fileSystemTemplate(this.model));
             return this;
         },
@@ -49,6 +49,5 @@ define([
                     });
                 });
         }
-        
     });    
 });
