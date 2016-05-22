@@ -42,6 +42,15 @@ exports.startServer = function () {
         var path = fileOps.getPath(req, fsPath);
         fileOps.sendFileList(req, res, path);
     });
+    
+    app.get('/getHomes', function (req, res) {
+       fileOps.sendConfiguredHomes(req, res); 
+    });
+    
+    app.get('/setHome', function (req, res) {
+        fsPath = req.query.home;
+        res.end(fsPath);
+    });
 
     app.listen(config.port, function () {
         var url = 'http://' + ip.address() + ':' + config.port;

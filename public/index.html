@@ -19,8 +19,25 @@
                         <%= file %>
                     </a>
                 </div>
-            <% }); %>
+                <% }); %>
         </div>
+    </script>
+    <script type="text/template" id="home-menu-template">
+        <div id="homeMenu" class="btn-group open">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home
+                <span class="caret"></span>
+            </button>
+            <ul class="home menu dropdown-menu">
+                <% _.each(frequentHomePaths, function(home) { %>
+                    <li class="homePaths">
+                        <a href="#">
+                            <%= home %>
+                        </a>
+                    </li>
+                    <% }); %>
+            </ul>
+        </div>
+
     </script>
 </head>
 
@@ -28,15 +45,14 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header col-xs-12">
-                <div id="nav-breadcrumb" class="col-xs-9">
+                <div id="nav-breadcrumb" class="col-xs-7">
                     <ol class="breadcrumb">
                         <li><a href="#/home">Home</a></li>
                     </ol>
                 </div>
-                <div>
-                    <button class="prevBtn btn btn-primary">prev</button>
-                    <button class="nextBtn btn btn-primary">next</button>
-                </div>
+
+                <button class="prevBtn btn btn-primary">prev</button>
+                <button class="nextBtn btn btn-primary">next</button>
             </div>
         </div>
     </nav>
