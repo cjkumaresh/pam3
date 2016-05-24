@@ -15,7 +15,6 @@ Fork the repo and clone the repo
 - `npm start`
 
 ###Configure path in `config.json`
-- `"homePath": '...'`
 - `frequentHomePaths: ['..','..']`
 
 
