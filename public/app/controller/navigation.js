@@ -11,11 +11,7 @@ define([
     return {
         handle: function (path) {
             var ext = path.slice((path.lastIndexOf(".") - 1 >>> 0) + 2).toLowerCase(),
-                data = {
-                    model: {
-                        'path': path
-                    }
-                };
+                data = { model: {'path': path} };
 
             switch (ext) {
                 case 'mp3':
