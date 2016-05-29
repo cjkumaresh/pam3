@@ -3,7 +3,13 @@ requirejs.config({
     paths: {
         jquery: 'lib/jquery',
         underscore: 'lib/underscore',
-        backbone: 'lib/backbone'
+        backbone: 'lib/backbone',
+        jquerySwipe: 'lib/jquery.touchSwipe.min'
+    },
+    shim: {
+        jquerySwipe: {
+            deps: ['jquery']
+        }
     }
 });
 
