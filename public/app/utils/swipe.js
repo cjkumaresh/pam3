@@ -11,10 +11,10 @@ define([
         index = this.files.indexOf(currentFile);
 
         if (index !== -1 && currentFile.split('.')[1]) {
-            if (swipeDirection === "prev" && index !== 0) {
+            if (swipeDirection === "right" && index !== 0) {
                 index--;
                 newFile = this.files[index];
-            } else if (swipeDirection === "next") {
+            } else if (swipeDirection === "left") {
                 index++;
                 newFile = this.files[index];
             }

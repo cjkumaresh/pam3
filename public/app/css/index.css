@@ -6,50 +6,37 @@
 }
 
 body {
-    padding-top: 70px;
-    background: #565656;
-    color: white
+    padding-top: 140px;
+
 }
-.navbar-default {
-    background-color: #063F6C;
-}
+
 #nav-breadcrumb ol {
-    background-color: #063F6C;
     margin-bottom: 0px;
     margin-top: 3px;
 }
 
-#pamBody {
-    -webkit-box-shadow: 3px 0px 71px -7px rgba(0,0,0,0.75);
-    -moz-box-shadow: 3px 0px 71px -7px rgba(0,0,0,0.75);
-    box-shadow: 3px 0px 71px -7px rgba(0,0,0,0.75);
-}
 #view a {
     margin-left: 10px;
 }
 label {
     margin-left: 7px;
 }
-a {
-    color: white;
-}
-#appName {
-    font-size: 20px;
-    color: white;
-}
+
 #location {
     padding: 10px;
 }
 .files {
     cursor: pointer;
     margin-bottom: -1px !important;
-    background: #3B3B3B;
-    color: white
 }
 .list-group-item {
-    border: 1px solid #676262; 
+    border: 1px solid #676262;
 }
 .media {
     padding-left: 0px;
     padding-right: 0px;
+}
+
+#homeMenu {
+    float: right;
 }
