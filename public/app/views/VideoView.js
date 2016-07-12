@@ -1,7 +1,10 @@
 'use strict';
 define([
-    'views/AppView'
-], function (AppView) {
+    'jquery',
+    'views/AppView',
+    'utils/swipe',
+    'jquerySwipe'
+], function ($, AppView, swipe) {
     return AppView.extend({
         el: '#view',
 
@@ -9,6 +12,12 @@ define([
             this.model.path = encodeURIComponent(this.model.path);
             this.$el.find('#file-system-view').html('');
             this.$el.find('#media-view').html('');
+            this.$el.swipe({
+                swipe: function (event, direction) {
+                    swipe(direction);
+                },
+                allowPageScroll:"auto"
+            });
             this.render();
         },
 
