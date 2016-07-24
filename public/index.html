@@ -23,11 +23,11 @@
         </div>
     </script>
     <script type="text/template" id="home-menu-template">
-        <div id="homeMenu" class="btn-group open">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home
+        <div id="homeMenu" class="dropdown">
+            <button id="dLabel" href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home
                 <span class="caret"></span>
             </button>
-            <ul class="home menu dropdown-menu">
+            <ul class="home menu dropdown-menu" aria-labelledby="dLabel">
                 <% _.each(frequentHomePaths, function(home) { %>
                     <li class="homePaths">
                         <a href="#"><%= home %></a>
