@@ -1,8 +1,9 @@
 'use strict';
 define([
     'jquery',
-    'backbone'
-], function ($, Backbone) {
+    'backbone',
+    'bootstrap'
+], function ($, Backbone, Bootstrap) {
     return Backbone.View.extend({
         el: 'body',
 
