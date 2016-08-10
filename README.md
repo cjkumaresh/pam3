@@ -19,6 +19,7 @@ Fork the repo and clone the repo
 
 
 ##TODO
+- redesign the user interface
 - proper icons for supported file types
 - create an executable to avoid node dependency
 - nginx config for routing
